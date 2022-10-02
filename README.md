@@ -1,3 +1,3 @@
 # team21
-![test.yml](https://code.harvard.edu/CS107/team21/.github/workflows/test.yml/badge.svg)
-![coverage.yml](https://code.harvard.edu/CS107/team21/.github/workflows/coverage.yml/badge.svg)
+![test.yml](https://code.harvard.edu/CS107/team21/actions/workflows/test.yml/badge.svg)
+![coverage.yml](https://code.harvard.edu/CS107/team21/actions/workflows/coverage.yml/badge.svg)
