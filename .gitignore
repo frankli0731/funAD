@@ -10,3 +10,8 @@
 .bash_history
 **/.cache
 **/.local
+
+*.idea
+docs.iml
+modules.xml
+
