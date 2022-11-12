@@ -31,7 +31,7 @@ jobs:
 
       - name: Build and install the funAD in the container (using PEP517/518)
         run: (python -m build --wheel && python -m pip intall dist/*)
-	
+
       - name: Run tests using test harness
         run: (cd tests && ./run_tests.sh CI)
 
