@@ -7,7 +7,7 @@ import operations as funAD
 
 def f(x):
     f1 = x[0]+funAD.sin(x[1])
-#    f2 = x[0]*funAD.exp(x[1])
+    f2 = x[0]*funAD.exp(x[1])
     return f1
 
 if __name__ == "__main__":

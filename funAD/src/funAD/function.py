@@ -1,5 +1,5 @@
 import numpy as np
-from dual_number import DualNumber
+from .dual_number import DualNumber
 
 class function:
 
