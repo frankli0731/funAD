@@ -2,22 +2,23 @@
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
-
 [project]
-name = "example_package_haz344"
+name = "cs107_package"
 version = "0.0.1"
 authors = [
-  { name="Example Author", email="hzhu@g.harvard.edu" },
+  { name="Hanlin Zhu", email="hzhu@g.harvard.edu" },
+  { name="Xu Tang", email="xutang@g.harvard.edu" },
+  { name="Tiantong Li", email="tiantongli@g.harvard.edu" },
+  { name="Zhecheng Yao", email="zhechengyao@g.harvard.edu" },
 ]
-description = "A small example package"
+description = "Test project for continuous integration and testing"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Testing"
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/pypa/sampleproject"
-"Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
+"Homepage" = "https://code.harvard.edu/CS107/team21"
