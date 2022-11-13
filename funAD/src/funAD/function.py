@@ -1,15 +1,113 @@
+# -*- coding: utf-8 -*-
+"""
+
+This module implements function class, a key component for forward mode autodifferentiation.
+
+"""
+
 import numpy as np
 from .dual_number import DualNumber
 
 class function:
+    '''
+    Create a function object to handle evalutation of a function at particular x coordinates and compute corresponding Jacobian through forward mode automatic differentiation 
+
+    Examples
+    --------
+    Please insert test case
+
+    >>> Please insert test case
+    >>> Please insert test case
+    Please insert test case   
+
+    '''
 
     def __init__(self, f=None):
+        """
+        Record user defined function
+
+        Note
+        ----
+        Please add
+
+        Parameters
+        ----------
+        f : user defined function
+            a function that takes in a vector or scalar of x and compute arithmetic result
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case   
+
+        """
         self.f = f
 
     def __call__(self,x):
+        """
+        Execute user defined function
+
+        Note
+        ----
+        Please add
+
+        Parameters
+        ----------
+        f : user defined function
+            a function that takes in a vector or scalar of x and compute arithmetic result
+        x : array_like
+            an array of numeric values (int, float or DualNumbers)
+            could be a scalar (int or float)
+
+        Returns
+        ----------
+        f : user defined function
+            a function evaluated at x 
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case   
+
+        """
         return self.f(x)
 
     def grad(self,x,p=None):
+        """
+        Compute Jacobian based on user specified function(s), x coordinate(s) and seed vector direction(s)
+
+        Note
+        ----
+        Please add, our p is not properly implemented here
+
+        Parameters
+        ----------
+        x : array_like
+            an array of numeric values (int, float or DualNumbers)
+            could be a scalar (int or float)
+        p : array_like
+            a seed vector user specified to compute particular directional derivatives
+
+        Returns
+        ----------
+        J : array_like
+            Jacobian matrix for given function
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case   
+
+        """
         J = []
         for i in range(len(x)): #m-pass
             dual_nums=[]
