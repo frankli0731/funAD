@@ -10,7 +10,8 @@ from .dual_number import DualNumber
 
 class function:
     '''
-    Create a function object to handle evalutation of a function at particular x coordinates and compute corresponding Jacobian through forward mode automatic differentiation 
+    Create a function object to handle evalutation of a function at particular x coordinates
+    and compute corresponding Jacobian through forward mode automatic differentiation.
 
     Examples
     --------
@@ -24,7 +25,7 @@ class function:
 
     def __init__(self, f=None):
         """
-        Record user defined function
+        Record user defined function.
 
         Note
         ----
@@ -33,7 +34,7 @@ class function:
         Parameters
         ----------
         f : user defined function
-            a function that takes in a vector or scalar of x and compute arithmetic result
+            A function that takes in a vector or scalar of x and compute arithmetic result.
 
         Examples
         --------
@@ -48,7 +49,7 @@ class function:
 
     def __call__(self,x):
         """
-        Execute user defined function
+        Execute user defined function.
 
         Note
         ----
@@ -57,15 +58,15 @@ class function:
         Parameters
         ----------
         f : user defined function
-            a function that takes in a vector or scalar of x and compute arithmetic result
+            A function that takes in a vector or scalar of x and compute arithmetic result.
         x : array_like
-            an array of numeric values (int, float or DualNumbers)
-            could be a scalar (int or float)
+            An array of numeric values (int, float or DualNumbers).
+            It could be a scalar (int or float).
 
         Returns
         ----------
         f : user defined function
-            a function evaluated at x 
+            A function evaluated at x. 
 
         Examples
         --------
@@ -89,15 +90,15 @@ class function:
         Parameters
         ----------
         x : array_like
-            an array of numeric values (int, float or DualNumbers)
-            could be a scalar (int or float)
+            An array of numeric values (int, float or DualNumbers).
+            It could be a scalar (int or float).
         p : array_like
-            a seed vector user specified to compute particular directional derivatives
+            A seed vector user specified to compute particular directional derivatives.
 
         Returns
         ----------
         J : array_like
-            Jacobian matrix for given function
+            Jacobian matrix for given function.
 
         Examples
         --------

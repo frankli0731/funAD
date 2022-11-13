@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 
-This module implements DualNumber class, a key component for forward mode automatic differentiation.
+This module implements DualNumber class, a key component 
+for forward mode automatic differentiation.
 
 """
 
@@ -12,10 +13,10 @@ class DualNumber(object):
     Attributes
     ----------
     _supported_scalars : tuple
-        Description of supported numerical types
+        Description of supported numerical types.
     
     '''
-    
+
     _supported_scalars = (int, float)
     
     def __init__(self,real,dual = None):
@@ -24,14 +25,15 @@ class DualNumber(object):
 
         Note
         ----
-        Dual part is typically only set to 1 through external function when finding derivative with respect to that dual number.
+        Dual part is typically only set to 1 through external function
+        when finding derivative with respect to that dual number.
 
         Parameters
         ----------
         real : float
-            real part of dual number
+            Real part of dual number.
         dual : float
-            dual part of dual number, default to 1 if not specified
+            Dual part of dual number, default to 1 if not specified.
 
         """
         self.real = real
@@ -42,7 +44,7 @@ class DualNumber(object):
 
     def __repr__(self):
         """
-        Nice string representation of dual number
+        Nice string representation of dual number.
 
         Returns
         ----------
@@ -67,7 +69,7 @@ class DualNumber(object):
         Parameters
         ----------
         other : int or float or DualNumber instance
-            other number being added
+            Other number being added.
         
         Returns
         ----------
@@ -96,7 +98,7 @@ class DualNumber(object):
         Parameters
         ----------
         other : int or float or DualNumber instance
-            other number being multiplied
+            Other number being multiplied.
         
         Returns
         ----------
@@ -125,7 +127,7 @@ class DualNumber(object):
         Parameters
         ----------
         other : int or float
-            other number being added
+            Other number being added.
         
         Returns
         ----------
@@ -149,7 +151,7 @@ class DualNumber(object):
         Parameters
         ----------
         other : int or float
-            other number being added
+            Other number being added.
         
         Returns
         ----------
@@ -168,16 +170,16 @@ class DualNumber(object):
     
     def set_dual(self,dual):
         """
-        Change only dual part of a dual number
+        Change only dual part of a dual number.
 
         Note
         ----
-        Dual part is typically only set to 1 through external function when finding derivative with respect to that dual number.
+        Please specify why we need this.
 
         Parameters
         ----------
         dual : float
-            dual part of dual number, default to 1 if not specified
+            Dual part of dual number, default to 1 if not specified.
 
         """
         self.dual = dual
