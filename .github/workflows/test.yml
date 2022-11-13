@@ -29,12 +29,9 @@ jobs:
       - name: Install dependencies
         run: python -m pip install pytest
 
-      - name: To the correct directory
-        run: cd funAD
-
       - name: Build and install the funAD in the container (using PEP517/518)
-        run: (python -m build --wheel && python -m pip intall dist/*)
+        run: (cd funAD && python -m build --wheel && python -m pip intall dist/*)
 
       - name: Run tests using test harness
-        run: (cd tests && ./run_tests.sh CI)
+        run: (cd funAD/tests && ./run_tests.sh CI)
 
