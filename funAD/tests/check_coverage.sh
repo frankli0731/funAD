@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 #!/usr/bin/env bash
 # File       : check_coverage.sh
 # Description: Coverage wrapper around test suite driver script
