@@ -90,6 +90,15 @@ class DualNumber(object):
             return DualNumber(self.real+other, self.dual)
         else:
             return DualNumber(self.real + other.real,self.dual+other.dual)
+        
+    def __sub__(self, other):
+        
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsuported type '{type(other)}'")
+        if isinstance(other, self._supported_scalars):
+            return DualNumber(self.real-other, self.dual)
+        else:
+            return DualNumber(self.real - other.real,self.dual-other.dual)
     
     def __mul__(self, other):
         '''
@@ -119,6 +128,17 @@ class DualNumber(object):
             return DualNumber(self.real * other, self.dual * other)
         else:
             return DualNumber(self.real * other.real, self.real*other.dual+self.dual*other.real)
+        
+    def __truediv__(self, other):
+        pass
+        
+    def __neg__(self):
+        pass
+        
+    def __rsub__(self, other):
+        pass
+    def __rtruediv__(self, other):
+        pass
     
     def __radd__(self, other):
         '''
