@@ -104,7 +104,7 @@ class DualNumber(object):
         Parameters
         ----------
         other : int or float
-            Other number being added.
+            Other number being added to.
         
         Returns
         ----------
@@ -156,7 +156,33 @@ class DualNumber(object):
             return DualNumber(self.real - other.real, self.dual - other.dual)
 
     def __rsub__(self, other):
-        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+        '''
+        Compute Subtraction of dual number from regular number.
+
+        Parameters
+        ----------
+        other : int or float or DualNumber instance
+            Other number being subtracted from.
+        
+        Returns
+        ----------
+        DualNumber
+        
+        Raises
+        ------
+        TypeError
+        If the other is not of any supported numeric format.        
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case
+
+        '''
+        if not isinstance(other, (*self._supported_scalars)):
             raise TypeError(f"Unsuported type '{type(other)}'")
         else:
             return DualNumber(other - self. real, - self.dual)
@@ -202,7 +228,7 @@ class DualNumber(object):
         Parameters
         ----------
         other : int or float
-            Other number being added.
+            Other number being multiplied.
         
         Returns
         -------
@@ -231,7 +257,7 @@ class DualNumber(object):
         Parameters
         ----------
         other : int or float or DualNumber instance
-            Other number being added.
+            Other number as the power a dual number is being raised to.
         
         Returns
         -------
@@ -261,11 +287,6 @@ class DualNumber(object):
     def __neg__(self):
         '''
         Change the sign of input dual number by multiplying real and dual part with -1.
-
-        Parameters
-        ----------
-        other : DualNumber instance
-            Other dual number being added.
         
         Returns
         -------
@@ -289,7 +310,7 @@ class DualNumber(object):
         Parameters
         ----------
         other : int or float or DualNumber instance
-            Other number being added.
+            Other number being divided.
         
         Returns
         -------
@@ -322,8 +343,8 @@ class DualNumber(object):
 
         Parameters
         ----------
-        other : int or float or DualNumber instance
-            Other number being added.
+        other : int or float
+            Other real number being divided.
         
         Returns
         -------
@@ -343,9 +364,8 @@ class DualNumber(object):
         Please insert test case
 
         '''
-        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+        if not isinstance(other, (*self._supported_scalars)):
             raise TypeError(f"Unsuported type '{type(other)}'")
-        elif isinstance(other, self._supported_scalars):
-            return DualNumber(other/self.real, (other*self.dual)/(other*other))
         else:
-            return DualNumber(self.real/other.real, (self.dual*other.real - other.real*self.dual)/(other.real*other.real))
+            return DualNumber(other/self.real, (other*self.dual)/(other*other))
+
