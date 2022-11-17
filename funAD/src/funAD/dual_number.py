@@ -284,7 +284,7 @@ class DualNumber(object):
 
     def __truediv__(self, other):
         '''
-        Compute division through taking -1 power of other and then multiplied with self
+        Compute float division of dual number by int, float or dual number.
 
         Parameters
         ----------
@@ -294,6 +294,11 @@ class DualNumber(object):
         Returns
         -------
         DualNumber
+        
+        Raises
+        ------
+        ZeroDivisionError
+            If the denominator other number's real part is zero.
 
         Examples
         --------
@@ -304,11 +309,16 @@ class DualNumber(object):
         Please insert test case
 
         '''
-        return self.__mul__(self, other**(-1))
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsuported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            return DualNumber(self.real/other, self.dual/other)
+        else:
+            return DualNumber(self.real/other.real, (self.dual*other.real - other.real*self.dual)/(other.real*other.real))
 
     def __rtruediv__(self, other):        
         '''
-        Compute division through taking -1 power of self and then multiplied with other
+        Compute float division of real number by dual number.
 
         Parameters
         ----------
@@ -318,6 +328,11 @@ class DualNumber(object):
         Returns
         -------
         DualNumber
+        
+        Raises
+        ------
+        ZeroDivisionError
+            If the denominator dual number's real part is zero.
 
         Examples
         --------
@@ -328,4 +343,9 @@ class DualNumber(object):
         Please insert test case
 
         '''
-        return self.__mul__(self.__pow__(-1), other)
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsuported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            return DualNumber(other/self.real, (other*self.dual)/(other*other))
+        else:
+            return DualNumber(self.real/other.real, (self.dual*other.real - other.real*self.dual)/(other.real*other.real))
