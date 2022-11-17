@@ -5,6 +5,7 @@ This module implements DualNumber class, a key component
 for forward mode automatic differentiation.
 
 """
+import numpy as np
 
 class DualNumber(object):
     '''
@@ -89,17 +90,47 @@ class DualNumber(object):
         if isinstance(other, self._supported_scalars):
             return DualNumber(self.real+other, self.dual)
         else:
-            return DualNumber(self.real + other.real,self.dual+other.dual)
+            return DualNumber(self.real + other.real, self.dual + other.dual)
+    
+    def __radd__(self, other):
+        '''
+        Compute reflective addition with regular number.
+
+        Parameters
+        ----------
+        other : int or float
+            Other number being added.
         
+        Returns
+        ----------
+        DualNumber
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case
+
+        '''
+        return self.__add__(other)
+    
     def __sub__(self, other):
         
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
         if isinstance(other, self._supported_scalars):
-            return DualNumber(self.real-other, self.dual)
+            return DualNumber(self.real - other, self.dual)
         else:
-            return DualNumber(self.real - other.real,self.dual-other.dual)
-    
+            return DualNumber(self.real - other.real, self.dual - other.dual)
+
+    def __rsub__(self, other):
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsuported type '{type(other)}'")
+        else:
+            return DualNumber(other - self. real, - self.dual)
+
     def __mul__(self, other):
         '''
         Compute Multiplication with dual number or regular number.
@@ -127,42 +158,7 @@ class DualNumber(object):
         if isinstance(other, self._supported_scalars):
             return DualNumber(self.real * other, self.dual * other)
         else:
-            return DualNumber(self.real * other.real, self.real*other.dual+self.dual*other.real)
-        
-    def __truediv__(self, other):
-        pass
-        
-    def __neg__(self):
-        pass
-        
-    def __rsub__(self, other):
-        pass
-    def __rtruediv__(self, other):
-        pass
-    
-    def __radd__(self, other):
-        '''
-        Compute reflective addition with regular number.
-
-        Parameters
-        ----------
-        other : int or float
-            Other number being added.
-        
-        Returns
-        ----------
-        DualNumber
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
-
-        '''
-        return self.__add__(other)
+            return DualNumber(self.real * other.real, self.real * other.dual + self.dual * other.real)
     
     def __rmul__(self, other):
         '''
@@ -187,19 +183,20 @@ class DualNumber(object):
 
         '''
         return self.__mul__(other)
-    
-    def set_dual(self,dual):
-        """
-        Change only dual part of a dual number.
 
-        Note
-        ----
-        Please specify why we need this.
+    def __pow__(self,other):
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsuported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            return DualNumber(self.real**other, other*self.real**(other-1)*self.dual )
+        else:
+            return DualNumber(self.real**other.real,self.real**other.real*(other.real*self.dual/self.real+other.dual*np.log(self.real)))
+        
+    def __neg__(self):
+        return DualNumber(- self.real , - self.dual)
 
-        Parameters
-        ----------
-        dual : float
-            Dual part of dual number, default to 1 if not specified.
+    def __truediv__(self, other):
+        return self.__mul__(self, other**(-1))
 
-        """
-        self.dual = dual
+    def __rtruediv__(self, other):
+        return self.__mul__(self.__pow__(-1), other)
