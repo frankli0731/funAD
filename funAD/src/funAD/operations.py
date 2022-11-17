@@ -76,6 +76,12 @@ def cos(self):
   else:
     return np.cos(self)
 
+def tangent(self):
+  if isinstance(self,DualNumber):
+    return DualNumber(np.tan(self.real), self.dual/(np.cos(self.real)**2))
+  else:
+    return np.tan(self)
+
 def exp(self):
   '''
   Overloads the exponential function. 
