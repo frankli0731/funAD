@@ -283,7 +283,49 @@ class DualNumber(object):
         return DualNumber(- self.real , - self.dual)
 
     def __truediv__(self, other):
+        '''
+        Compute division through taking -1 power of other and then multiplied with self
+
+        Parameters
+        ----------
+        other : int or float or DualNumber instance
+            Other number being added.
+        
+        Returns
+        ----------
+        DualNumber
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case
+
+        '''
         return self.__mul__(self, other**(-1))
 
-    def __rtruediv__(self, other):
+    def __rtruediv__(self, other):        
+        '''
+        Compute division through taking -1 power of self and then multiplied with other
+
+        Parameters
+        ----------
+        other : int or float or DualNumber instance
+            Other number being added.
+        
+        Returns
+        ----------
+        DualNumber
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case
+
+        '''
         return self.__mul__(self.__pow__(-1), other)
