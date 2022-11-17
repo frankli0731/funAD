@@ -254,7 +254,9 @@ class DualNumber(object):
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
         elif isinstance(other, self._supported_scalars):
-            return DualNumber(self.real**other, other*self.real**(other-1)*self.dual )
+            if other < 0:
+                return 1/self.__pow__(-1*other)
+            return DualNumber(self.real**other, other*self.real**(other-1)*self.dual)
         else:
             return DualNumber(self.real**other.real,self.real**other.real*(other.real*self.dual/self.real+other.dual*np.log(self.real)))
         
@@ -314,7 +316,7 @@ class DualNumber(object):
         elif isinstance(other, self._supported_scalars):
             return DualNumber(self.real/other, self.dual/other)
         else:
-            return DualNumber(self.real/other.real, (self.dual*other.real - other.real*self.dual)/(other.real*other.real))
+            return DualNumber(self.real/other.real, (self.dual*other.real - other.dual*self.real)/(other.real*other.real))
 
     def __rtruediv__(self, other):        
         '''
@@ -343,9 +345,7 @@ class DualNumber(object):
         Please insert test case
 
         '''
-        if not isinstance(other, (*self._supported_scalars, DualNumber)):
-            raise TypeError(f"Unsuported type '{type(other)}'")
-        elif isinstance(other, self._supported_scalars):
-            return DualNumber(other/self.real, (other*self.dual)/(other*other))
+        if isinstance(other, self._supported_scalars):
+            return DualNumber(other/self.real, (-1*other*self.dual)/(self.real*self.real))    
         else:
-            return DualNumber(self.real/other.real, (self.dual*other.real - other.real*self.dual)/(other.real*other.real))
+            raise TypeError(f"Unsuported type '{type(other)}'")

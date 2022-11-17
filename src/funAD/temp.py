@@ -1,13 +1,12 @@
 # please ignore, just a temporary test file
 import numpy as np
+import operations as ad
 from function import function
-import operations as funAD
-
-
+from dual_number import DualNumber
 
 def f(x):
-    f1 = x[0]+funAD.sin(x[1])
-    f2 = x[0]*funAD.exp(x[1])
+    f1 = x[0]+ad.sin(x[1])
+    f2 = x[0]*ad.exp(x[1])
     return f1
 
 if __name__ == "__main__":
