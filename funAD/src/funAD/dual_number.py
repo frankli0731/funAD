@@ -24,17 +24,17 @@ class DualNumber(object):
         """
         Specify the real and dual part of a dual number
 
-        Note
-        ----
-        Dual part is typically only set to 1 through external function
-        when finding derivative with respect to that dual number.
-
         Parameters
         ----------
         real : float
             Real part of dual number.
         dual : float
             Dual part of dual number, default to 1 if not specified.
+        
+        Note
+        ----
+        Dual part is typically only set to 1 through external function
+        when finding derivative with respect to that dual number.
 
         """
         self.real = real
@@ -171,7 +171,7 @@ class DualNumber(object):
             Other number being multiplied.
         
         Returns
-        ----------
+        -------
         DualNumber
         
         Raises
@@ -205,7 +205,7 @@ class DualNumber(object):
             Other number being added.
         
         Returns
-        ----------
+        -------
         DualNumber
         
         Raises
@@ -234,11 +234,11 @@ class DualNumber(object):
             Other number being added.
         
         Returns
-        ----------
+        -------
         DualNumber
         
         Raises
-        ----------
+        ------
         TypeError
         If the other number input is not of any supported numeric format.     
 
@@ -268,7 +268,7 @@ class DualNumber(object):
             Other dual number being added.
         
         Returns
-        ----------
+        -------
         DualNumber 
 
         Examples
@@ -292,7 +292,7 @@ class DualNumber(object):
             Other number being added.
         
         Returns
-        ----------
+        -------
         DualNumber
 
         Examples
@@ -316,7 +316,7 @@ class DualNumber(object):
             Other number being added.
         
         Returns
-        ----------
+        -------
         DualNumber
 
         Examples

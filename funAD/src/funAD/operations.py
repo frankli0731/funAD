@@ -12,10 +12,6 @@ def sin(self):
   '''
   Overloads the sin() function. 
 
-  Note
-  ----------
-  Rely on numpy sine function.
-
   Parameters
   ----------
   x : int or float or DualNumber instance
@@ -45,10 +41,6 @@ def sin(self):
 def cos(self):
   '''
   Overloads the cos() function. 
-
-  Note
-  ----------
-  Rely on numpy cosine function.
 
   Parameters
   ----------
@@ -80,10 +72,6 @@ def tan(self):
   '''
   Overloads the tangent function. 
 
-  Note
-  ----------
-  Rely on numpy tan function.
-
   Parameters
   ----------
   x : int or float or DualNumber instance
@@ -109,10 +97,6 @@ def tan(self):
 def exp(self):
   '''
   Overloads the exponential function. 
-
-  Note
-  ----------
-  Rely on numpy exp function.
 
   Parameters
   ----------

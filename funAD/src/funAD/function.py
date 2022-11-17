@@ -51,20 +51,16 @@ class function:
         """
         Execute user defined function.
 
-        Note
-        ----
-        Please add
-
         Parameters
         ----------
         f : user defined function
             A function that takes in a vector or scalar of x and compute arithmetic result.
         x : array_like
-            An array of numeric values (int, float or DualNumbers).
+            An array of numeric values (int, float or DualNumber instance).
             It could be a scalar (int or float).
 
         Returns
-        ----------
+        -------
         f : user defined function
             A function evaluated at x. 
 
@@ -96,7 +92,7 @@ class function:
             A seed vector user specified to compute particular directional derivatives.
 
         Returns
-        ----------
+        -------
         J : array_like
             Jacobian matrix for given function.
 
