@@ -76,7 +76,31 @@ def cos(self):
   else:
     return np.cos(self)
 
-def tangent(self):
+def tan(self):  
+  '''
+  Overloads the tangent function. 
+
+  Note
+  ----------
+  Rely on numpy tan function.
+
+  Parameters
+  ----------
+  x : int or float or DualNumber instance
+
+  Returns
+  -------
+  float or DualNumber instance
+      
+  Examples
+  --------
+  Please insert test case
+
+  >>> Please insert test case
+  >>> Please insert test case
+  Please insert test case   
+
+  '''
   if isinstance(self,DualNumber):
     return DualNumber(np.tan(self.real), self.dual/(np.cos(self.real)**2))
   else:
