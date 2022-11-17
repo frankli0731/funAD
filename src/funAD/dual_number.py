@@ -254,8 +254,6 @@ class DualNumber(object):
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
         elif isinstance(other, self._supported_scalars):
-            if other < 0:
-                return 1/self.__pow__(-1*other)
             return DualNumber(self.real**other, other*self.real**(other-1)*self.dual)
         else:
             return DualNumber(self.real**other.real,self.real**other.real*(other.real*self.dual/self.real+other.dual*np.log(self.real)))
@@ -349,3 +347,148 @@ class DualNumber(object):
             return DualNumber(other/self.real, (-1*other*self.dual)/(self.real*self.real))    
         else:
             raise TypeError(f"Unsuported type '{type(other)}'")
+
+    #=================== inplace operation ===================#
+    def __iadd__(self,other):
+        '''
+        Compute inplace addition of dual number by int, float or dual number.
+
+        Parameters
+        ----------
+        other : int or float or DualNumber instance
+            Other number being added.
+        
+        Returns
+        -------
+        DualNumber
+        
+        Raises
+        ------
+        ZeroDivisionError
+            If the denominator other number's real part is zero.
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case
+        '''
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsuported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            self.real += other
+            return self
+        else:
+            self.real += other.real
+            self.dual += other.dual
+            return self
+
+    def __isub__(self,other):
+        '''
+        Compute inplace substraction of dual number by int, float or dual number.
+
+        Parameters
+        ----------
+        other : int or float or DualNumber instance
+            Other number being added.
+        
+        Returns
+        -------
+        DualNumber
+        
+        Raises
+        ------
+        ZeroDivisionError
+            If the denominator other number's real part is zero.
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case
+        '''
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsuported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            self.real -= other
+            return self
+        else:
+            self.real -= other.real
+            self.dual -= other.dual
+            return self
+    
+    def __imul__(self,other):
+        '''
+        Compute inplace multiplication of dual number by int, float or dual number.
+
+        Parameters
+        ----------
+        other : int or float or DualNumber instance
+            Other number being added.
+        
+        Returns
+        -------
+        DualNumber
+        
+        Raises
+        ------
+        ZeroDivisionError
+            If the denominator other number's real part is zero.
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case
+        '''
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsuported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            self.real *= other
+            self.dual *= other
+            return self
+        else:
+            self.real,self.dual = self.real*other.real, self.dual*other.real + self.real*other.dual
+            return self
+    
+    def __itruediv__(self,other):
+        '''
+        Compute inplace division of dual number by int, float or dual number.
+
+        Parameters
+        ----------
+        other : int or float or DualNumber instance
+            Other number being added.
+        
+        Returns
+        -------
+        DualNumber
+        
+        Raises
+        ------
+        ZeroDivisionError
+            If the denominator other number's real part is zero.
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case
+        '''
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsuported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            self.real /= other
+            self.dual /= other
+            return self
+        else:
+            self.real,self.dual = self.real/other.real, (self.dual*other.real - self.real*other.dual)/(other.real*other.real)
+            return self

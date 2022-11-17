@@ -10,11 +10,19 @@ def f(x):
     return f1
 
 if __name__ == "__main__":
-    f = function(f)
-    x = np.ones((2,))
+    # f = function(f)
+    # x = np.ones((2,))
 
-    fx = f(x)
-    g = f.grad(x)
+    # fx = f(x)
+    # g = f.grad(x)
 
-    print("value:",fx)
-    print("gradient/Jacobian",g)
+    # print("value:",fx)
+    # print("gradient/Jacobian",g)
+
+    a = DualNumber(1,2)
+    b = DualNumber(2,3)
+    c = 1
+    c /= a
+    a *= b
+    print(a)
+    print(c)
