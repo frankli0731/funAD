@@ -75,6 +75,11 @@ class DualNumber(object):
         Returns
         ----------
         DualNumber
+        
+        Raises
+        ------
+        TypeError
+        If the other number inputted is not of any supported numeric format.     
 
         Examples
         --------
@@ -117,7 +122,32 @@ class DualNumber(object):
         return self.__add__(other)
     
     def __sub__(self, other):
+        '''
+        Compute Subtraction of dual number or regular number from dual number or regular number.
+
+        Parameters
+        ----------
+        other : int or float or DualNumber instance
+            Other number being subtracted.
         
+        Returns
+        ----------
+        DualNumber
+        
+        Raises
+        ------
+        TypeError
+        If the other is not of any supported numeric format.        
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case
+
+        '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
         if isinstance(other, self._supported_scalars):
@@ -143,6 +173,11 @@ class DualNumber(object):
         Returns
         ----------
         DualNumber
+        
+        Raises
+        ------
+        TypeError
+        If the other number inputted is not of any supported numeric format.      
 
         Examples
         --------
@@ -172,6 +207,11 @@ class DualNumber(object):
         Returns
         ----------
         DualNumber
+        
+        Raises
+        ------
+        TypeError
+        If the other number input is not of any supported numeric format.     
 
         Examples
         --------
@@ -185,6 +225,32 @@ class DualNumber(object):
         return self.__mul__(other)
 
     def __pow__(self,other):
+        '''
+        Compute power raised to input regular number or dual number.
+
+        Parameters
+        ----------
+        other : int or float or DualNumber instance
+            Other number being added.
+        
+        Returns
+        ----------
+        DualNumber
+        
+        Raises
+        ----------
+        TypeError
+        If the other number input is not of any supported numeric format.     
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case
+
+        '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
         elif isinstance(other, self._supported_scalars):
@@ -193,6 +259,27 @@ class DualNumber(object):
             return DualNumber(self.real**other.real,self.real**other.real*(other.real*self.dual/self.real+other.dual*np.log(self.real)))
         
     def __neg__(self):
+        '''
+        Change the sign of input dual number by multiplying real and dual part with -1.
+
+        Parameters
+        ----------
+        other : DualNumber instance
+            Other dual number being added.
+        
+        Returns
+        ----------
+        DualNumber 
+
+        Examples
+        --------
+        Please insert test case
+
+        >>> Please insert test case
+        >>> Please insert test case
+        Please insert test case
+
+        '''
         return DualNumber(- self.real , - self.dual)
 
     def __truediv__(self, other):
