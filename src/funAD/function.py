@@ -23,7 +23,7 @@ class function:
 
     '''
 
-    def __init__(self, f=None):
+    def __init__(self, *fs, x_dim):
         """
         Record user defined function.
 
@@ -45,7 +45,8 @@ class function:
         Please insert test case   
 
         """
-        self.f = f
+        self.f = lambda x: [f(x) for f in fs]
+        self.x_dim = x_dim
 
     def __call__(self,x):
         """
@@ -105,6 +106,8 @@ class function:
         Please insert test case   
 
         """
+        if len(x) != self.x_dim:
+            raise ValueError('Dimension Mismatch')
         J = []
         for i in range(len(x)): #m-pass
             dual_nums=[]
