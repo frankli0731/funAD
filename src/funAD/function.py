@@ -108,19 +108,34 @@ class function:
         """
         if len(x) != self.x_dim:
             raise ValueError('Dimension Mismatch')
-        J = []
-        for i in range(len(x)): #m-pass
-            dual_nums=[]
-            p = np.identity(len(x))[:,i].tolist()
-            for input in zip(x,p):
-                dual_nums.append(DualNumber(*input))
-            result = self.f(dual_nums)
-            if isinstance(result,DualNumber):
-                J.append(result.dual)
-                #val = result.real
+
+        if p is not None: # p provided
+            if len(p) != self.x_dim:
+                raise ValueError('Dimension Mismatch')
             else:
-                # when result is a vector output, i.e, for vector func
-                J.append([d.dual for d in result])
-                #val=np.array([d.real for d in result])
-        J = np.array(J).T
+                dual_nums = []
+                for input in zip(x,p):
+                    dual_nums.append(DualNumber(*input))
+                result = self.f(dual_nums)
+                if isinstance(result,DualNumber):
+                    return result.dual
+                else:
+                    return np.array([d.dual for d in result]).T
+
+        else: # m-pass, jacobian finding
+            J = []
+            for i in range(len(x)): 
+                dual_nums=[]
+                p = np.identity(len(x))[:,i].tolist()
+                for input in zip(x,p):
+                    dual_nums.append(DualNumber(*input))
+                result = self.f(dual_nums)
+                if isinstance(result,DualNumber):
+                    J.append(result.dual)
+                    #val = result.real
+                else:
+                    # when result is a vector output, i.e, for vector func
+                    J.append([d.dual for d in result])
+                    #val=np.array([d.real for d in result])
+            J = np.array(J).T
         return J
