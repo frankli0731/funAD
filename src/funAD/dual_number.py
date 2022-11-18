@@ -382,11 +382,6 @@ class DualNumber(object):
         Returns
         -------
         DualNumber
-        
-        Raises
-        ------
-        ZeroDivisionError
-            If the denominator other number's real part is zero.
 
         Examples
         --------
@@ -418,11 +413,6 @@ class DualNumber(object):
         Returns
         -------
         DualNumber
-        
-        Raises
-        ------
-        ZeroDivisionError
-            If the denominator other number's real part is zero.
 
         Examples
         --------
@@ -454,11 +444,6 @@ class DualNumber(object):
         Returns
         -------
         DualNumber
-        
-        Raises
-        ------
-        ZeroDivisionError
-            If the denominator other number's real part is zero.
 
         Examples
         --------
