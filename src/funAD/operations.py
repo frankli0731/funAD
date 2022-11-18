@@ -6,7 +6,7 @@ This module implement overloading functions to handle arithmetic for dual number
 """
 
 import numpy as np
-from dual_number import DualNumber
+from .dual_number import DualNumber
 
 def exp(self):
   '''
