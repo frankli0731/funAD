@@ -4,21 +4,20 @@ This test suite (a module) runs tests for dual_number of the
 funAD package.
 """
 
-import pytest
 import unittest
 
 from funAD.dual_number import DualNumber
 
-def test_class_DualNumber(self):
+class TestDualNumber(unittest.TestCase):
     
-    def test_init():
+    def test_init(self):
         # test init
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
         assert d1.real == real1 and d1.dual == dual1
         
-    def test_add():
+    def test_add(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -41,7 +40,7 @@ def test_class_DualNumber(self):
         d3 = d1+float_num
         assert d3.real == real1+float_num and d3.dual == dual1
 
-    def test_sub():
+    def test_sub(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -64,7 +63,7 @@ def test_class_DualNumber(self):
         d3 = d1-float_num
         assert d3.real == real1-float_num and d3.dual == dual1
     
-    def test_mul():
+    def test_mul(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -88,7 +87,7 @@ def test_class_DualNumber(self):
         d3=d1*float_num
         assert d3.real == real1*float_num and d3.dual == dual1
 
-    def test_truediv():
+    def test_truediv(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -113,7 +112,7 @@ def test_class_DualNumber(self):
         assert d3.real == real1/float_num and d3.dual == dual1
 
     # reflective operators
-    def test_radd():
+    def test_radd(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -130,7 +129,7 @@ def test_class_DualNumber(self):
         d3 = float_num+d1
         assert d3.real == real1+float_num and d3.dual == dual1
         
-    def test_rsub():
+    def test_rsub(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -146,7 +145,7 @@ def test_class_DualNumber(self):
         d3 = float_num-d1
         assert d3.real == real1-float_num and d3.dual == dual1
     
-    def test_rmul():
+    def test_rmul(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -162,7 +161,7 @@ def test_class_DualNumber(self):
         d3=float_num*d1
         assert d3.real == real1*float_num and d3.dual == dual1
         
-    def test_rtruediv():
+    def test_rtruediv(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -178,7 +177,7 @@ def test_class_DualNumber(self):
         d3=float_num/d1
         assert d3.real == float_num/real1 and d3.dual == dual1
     
-    def test_iadd():
+    def test_iadd(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -204,7 +203,7 @@ def test_class_DualNumber(self):
         d2+=float_num
         assert d2.real == real2+float_num and d2.dual == dual2
 
-    def test_isub():
+    def test_isub(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -230,7 +229,7 @@ def test_class_DualNumber(self):
         d2-=float_num
         assert d2.real == real2-float_num and d2.dual == dual2
 
-    def test_imul():
+    def test_imul(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -256,7 +255,7 @@ def test_class_DualNumber(self):
         d2*=float_num
         assert d2.real == real2*float_num and d2.dual == dual2
 
-    def test_itruediv():
+    def test_itruediv(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -282,7 +281,7 @@ def test_class_DualNumber(self):
         d2/=float_num
         assert d2.real == real2/float_num and d2.dual == dual2
     
-    def test_sin():
+    def test_sin(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -291,7 +290,7 @@ def test_class_DualNumber(self):
         d2 = DualNumber.sin(d1)
         assert d2.real == np.sin(real1) and d2.dual == dual1*np.cos(real1)
         
-    def test_cos():
+    def test_cos(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -300,7 +299,7 @@ def test_class_DualNumber(self):
         d2 = DualNumber.cos(d1)
         assert d2.real == np.cos(real1) and d2.dual == -1*np.sin(real1)*dual1
         
-    def test_exp():
+    def test_exp(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -308,7 +307,7 @@ def test_class_DualNumber(self):
         d2 = DualNumber.exp(d1)
         assert d2.real == np.exp(real1) and d2.dual == np.exp(real1)*dual
     
-    def test_neg():
+    def test_neg(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -316,7 +315,7 @@ def test_class_DualNumber(self):
         d2 = -d1
         assert d2.real == -real1 and d2.dual == -dual1
     
-    def test_pos():
+    def test_pos(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -324,7 +323,7 @@ def test_class_DualNumber(self):
         d2 = +d1
         assert d2.real == real1 and d2.dual == dual1
         
-    def test_eq():
+    def test_eq(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -347,7 +346,7 @@ def test_class_DualNumber(self):
         assert d1==(float_num)
         assert not(d1==float_num-1.0)
         
-    def test_neq():
+    def test_neq(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -370,7 +369,7 @@ def test_class_DualNumber(self):
         assert d1!=(float_num-1.0)
         assert not(d1!=float_num)
 
-    def test_lt():
+    def test_lt(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -389,7 +388,7 @@ def test_class_DualNumber(self):
         # test less-than operator with float number
         assert d1<float_num
         
-    def test_gt():
+    def test_gt(self):
         real1=5
         dual1=4
         d1=DualNumber(real1,dual1)
@@ -408,7 +407,7 @@ def test_class_DualNumber(self):
         # test greater-than operator with float number
         assert d1>float_num
 
-    def test_le():
+    def test_le(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -436,7 +435,7 @@ def test_class_DualNumber(self):
         assert d1<=float_num
         assert d1<=float_num2
         
-    def test_le():
+    def test_le(self):
         real1=5
         dual1=4
         d1=DualNumber(real1,dual1)
@@ -463,3 +462,6 @@ def test_class_DualNumber(self):
         # test greater-than-or-equal operator with float number
         assert d1>=float_num
         assert d1>=float_num2
+        
+if __name__ == "__main__":
+    unittest.main()
