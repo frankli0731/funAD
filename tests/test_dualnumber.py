@@ -170,11 +170,11 @@ class TestDualNumber():
         
         # test division (int / dual number)
         d3=int_num/d1
-        assert d3.real == int_num/real1 and d3.dual == dual1
+        assert d3.real == int_num/real1 and d3.dual == -1*dual1*int_num/(real1*real1)
 
         # test division (float / dual number)
         d3=float_num/d1
-        assert d3.real == float_num/real1 and d3.dual == dual1
+        assert d3.real == float_num/real1 and d3.dual == -1*dual1*float_num/(real1*real1)
     
     def test_iadd(self):
         real1=1
@@ -216,7 +216,7 @@ class TestDualNumber():
         
         # test -= operator (dual number -= dual number)
         d2-=d1
-        assert d2.real == real1-real2 and d2.dual == dual1-dual2
+        assert d2.real == real2-real1 and d2.dual == dual2-dual1
 
         # test -= operator (dual number -= int)
         d2=DualNumber(real2,dual2)
@@ -267,8 +267,8 @@ class TestDualNumber():
         float_num=float(1.0)
         
          # test /= operator (dual number /= dual number)
-        d2/=d1
-        assert d2.real == real1/real2 and d2.dual == (dual1*real2-real1*dual2)/(real2*real2)
+        d1/=d2
+        assert d1.real == real1/real2 and d1.dual == (dual1*real2-real1*dual2)/(real2*real2)
 
         # test /= operator (dual number /= int)
         d2=DualNumber(real2,dual2)
