@@ -118,6 +118,6 @@ class function:
             else:
                 # when result is a vector output, i.e, for vector func
                 J.append([d.dual for d in result])
-                #val=[d.real for d in result]
+                #val=np.array([d.real for d in result])
         J = np.array(J).T
         return J
