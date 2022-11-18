@@ -1,0 +1,25 @@
+name: Continuous Integration Test Coverage
+
+# Controls when the workflow will run
+on: push
+
+jobs:
+    
+  test_coverage:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'  
+
+      - name: Install dependencies
+        run: python3 -m pip install pytest pytest-cov
+
+      # Run the tests for the installed package
+      - name: Run tests using test harness
+        run: cd tests && ./run_tests.sh pytest --cov-fail-under=90 --cov-report term-missing --cov=funAD
