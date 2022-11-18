@@ -5,7 +5,7 @@ funAD package.
 """
 import pytest
 import numpy as np
-from funAD.dual_number import DualNumber
+from funAD import DualNumber
 
 class TestDualNumber():
     
