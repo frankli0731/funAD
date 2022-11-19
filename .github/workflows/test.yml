@@ -1,6 +1,6 @@
 name: Continuous Integration Tests
 
-on: push:
+on: push
 
 jobs:
   # This workflow contains a single job called "install_and_test"
@@ -23,4 +23,4 @@ jobs:
 
       # Run the tests for the installed package
       - name: Run tests using test harness
-        run: (cd tests && ./run_tests.sh pytest --cov-fail-under=30 --cov-report term-missing --cov=funAD > result.log)
+        run: (cd cd ../../tests && ./run_tests.sh pytest --cov-fail-under=30 --cov-report term-missing --cov=funAD > result.log)
