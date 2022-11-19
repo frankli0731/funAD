@@ -283,6 +283,12 @@ class DualNumber(object):
             return DualNumber(self.real**other, other*self.real**(other-1)*self.dual)
         else:
             return DualNumber(self.real**other.real,self.real**other.real*(other.real*self.dual/self.real+other.dual*np.log(self.real)))
+    
+    def __rpow__(self,other):
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsuported type '{type(other)}'")
+        other = DualNumber(other,0)
+        return other.__pow__(self)
         
     def __neg__(self):
         '''
