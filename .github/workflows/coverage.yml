@@ -20,9 +20,11 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install -U pytest pytest-cov
 
-      # Run the tests for the installed package
-      - name: Run tests using test harness
-        run: cd ../../tests && ./check_coverage.sh pytest
+      - name: Generate report log file for milestone 2
+        run: (cd tests && ./run_tests.sh pytest --cov-fail-under=30 --cov-report term-missing --cov=funAD > result.log)
 
-      - name: Extract test coverage score (percentage)
-        run: awk '$1 == "TOTAL" {print $NF+0}' result.log
+      - name: check success or pass for test coverage
+        run: (cd tests && ./check_coverage.sh pytest)
+
+      
+
