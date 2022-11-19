@@ -19,7 +19,7 @@ jobs:
 
       # Install Python dependencies
       - name: Install dependencies
-        run: python3 -m pip install -U pytest
+        run: python3 -m pip install -U pytest pytest-cov
 
       # Run the tests for the installed package
       - name: Run tests using test harness
