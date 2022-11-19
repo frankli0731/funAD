@@ -3,6 +3,7 @@
 # Description: Coverage wrapper around test suite driver script
 # Copyright 2022 Harvard University. All Rights Reserved.
 set -e
+BAR=30
 
 tool='coverage'
 if [[ $# -gt 0 ]]; then
@@ -18,7 +19,11 @@ if [[ ${tool} == 'coverage' ]]; then
     coverage report -m
 elif [[ ${tool} == 'pytest' ]]; then
     # generate coverage reports with pytest in one go
-    ./coverage_status.sh
+    if [[ $(awk '$1 == "TOTAL" {print $NF+0}' result.log) -ge $BAR ]]; then
+        exit 0
+    else
+        exit 1
+    fi
 else
     # error: write to stderr
     >&2 echo "Error: unknown tool '${tool}'"
