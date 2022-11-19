@@ -246,7 +246,7 @@ class DualNumber(object):
         If the other number input is not of any supported numeric format.    
         
         '''
-        if not isinstance(other, (*self._supported_scalars)):
+        if not isinstance(other, self._supported_scalars):
             raise TypeError(f"Unsuported type '{type(other)}'")
         other = DualNumber(other,0)
         return other.__pow__(self)
