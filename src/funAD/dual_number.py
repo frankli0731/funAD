@@ -14,8 +14,7 @@ class DualNumber(object):
     Attributes
     ----------
     _supported_scalars : tuple
-        Description of supported numerical types.
-    
+        Description of supported numerical types.    
     '''
 
     _supported_scalars = (int, float)
@@ -35,7 +34,7 @@ class DualNumber(object):
         ----
         Dual part is typically only set to 1 through external function
         when finding derivative with respect to that dual number.
-
+        
         """
         self.real = real
         if dual == None:
@@ -79,16 +78,8 @@ class DualNumber(object):
         Raises
         ------
         TypeError
-        If the other number inputted is not of any supported numeric format.     
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
-
+        If the other number inputted is not of any supported numeric format. 
+        
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
@@ -109,15 +100,7 @@ class DualNumber(object):
         Returns
         ----------
         DualNumber
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
-
+        
         '''
         return self.__add__(other)
     
@@ -137,16 +120,8 @@ class DualNumber(object):
         Raises
         ------
         TypeError
-        If the other is not of any supported numeric format.        
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
-
+        If the other is not of any supported numeric format.       
+        
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
@@ -172,15 +147,7 @@ class DualNumber(object):
         ------
         TypeError
         If the other is not of any supported numeric format.        
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
-
+        
         '''
         if not isinstance(other, self._supported_scalars):
             raise TypeError(f"Unsuported type '{type(other)}'")
@@ -204,14 +171,6 @@ class DualNumber(object):
         ------
         TypeError
         If the other number inputted is not of any supported numeric format.      
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
 
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
@@ -237,16 +196,8 @@ class DualNumber(object):
         Raises
         ------
         TypeError
-        If the other number input is not of any supported numeric format.     
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
-
+        If the other number input is not of any supported numeric format.    
+        
         '''
         return self.__mul__(other)
 
@@ -266,16 +217,8 @@ class DualNumber(object):
         Raises
         ------
         TypeError
-        If the other number input is not of any supported numeric format.     
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
-
+        If the other number input is not of any supported numeric format.   
+        
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
@@ -285,7 +228,25 @@ class DualNumber(object):
             return DualNumber(self.real**other.real,self.real**other.real*(other.real*self.dual/self.real+other.dual*np.log(self.real)))
     
     def __rpow__(self,other):
-        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+        '''
+        Compute input int or float number raised to the power of dual number.
+
+        Parameters
+        ----------
+        other : int or float
+            Other number as the base to which is raised to the power of a dual number.
+        
+        Returns
+        -------
+        DualNumber
+        
+        Raises
+        ------
+        TypeError
+        If the other number input is not of any supported numeric format.    
+        
+        '''
+        if not isinstance(other, (*self._supported_scalars)):
             raise TypeError(f"Unsuported type '{type(other)}'")
         other = DualNumber(other,0)
         return other.__pow__(self)
@@ -297,15 +258,7 @@ class DualNumber(object):
         Returns
         -------
         DualNumber 
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
-
+        
         '''
         return DualNumber(- self.real , - self.dual)
 
@@ -326,15 +279,7 @@ class DualNumber(object):
         ------
         ZeroDivisionError
             If the denominator other number's real part is zero.
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
-
+            
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
@@ -360,15 +305,7 @@ class DualNumber(object):
         ------
         ZeroDivisionError
             If the denominator dual number's real part is zero.
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
-
+            
         '''
         if isinstance(other, self._supported_scalars):
             return DualNumber(other/self.real, (-1*other*self.dual)/(self.real*self.real))    
@@ -388,14 +325,7 @@ class DualNumber(object):
         Returns
         -------
         DualNumber
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
+        
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
@@ -419,14 +349,7 @@ class DualNumber(object):
         Returns
         -------
         DualNumber
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
+        
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
@@ -440,7 +363,7 @@ class DualNumber(object):
     
     def __imul__(self,other):
         '''
-        Compute inplace multiplication of dual number by int, float or dual number.
+        Compute inplace multiplication of dual number with int, float or dual number.
 
         Parameters
         ----------
@@ -450,14 +373,7 @@ class DualNumber(object):
         Returns
         -------
         DualNumber
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
+        
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
@@ -486,14 +402,7 @@ class DualNumber(object):
         ------
         ZeroDivisionError
             If the denominator other number's real part is zero.
-
-        Examples
-        --------
-        Please insert test case
-
-        >>> Please insert test case
-        >>> Please insert test case
-        Please insert test case
+            
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsuported type '{type(other)}'")
