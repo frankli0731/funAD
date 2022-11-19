@@ -22,7 +22,7 @@ jobs:
 
       # Run the tests for the installed package
       - name: Run tests using test harness
-        run: cd tests && ./run_tests.sh pytest --cov-fail-under=90 --cov-report term-missing --cov=funAD > result.log
+        run: cd tests && ./check_coverage.sh pytest
 
       - name: Extract test coverage score (percentage)
         run: awk '$1 == "TOTAL" {print $NF+0}' result.log
