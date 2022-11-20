@@ -28,7 +28,7 @@ jobs:
 
       # Run the test coverage for the build
       - name: Run tests and generate coverage html
-        run: (cd tests && ./run_tests.sh pytest --cov=funAD --cov-report=html:htmlcov)
+        run: (cd tests && ./run_tests.sh CI --cov=funAD --cov-report=html:htmlcov)
 
       # Remove .gitignore file in test coverage data to be pushed to gh-pages
       # branch
