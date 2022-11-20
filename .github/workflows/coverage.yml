@@ -21,7 +21,7 @@ jobs:
         run: python3 -m pip install -U pytest pytest-cov
 
       - name: Generate report log file for milestone 2
-        run: (cd tests && ./run_tests.sh pytest --cov-fail-under=70 --cov-report term-missing --cov=funAD > result.log)
+        run: (cd tests && ./run_tests.sh pytest --cov-fail-under=60 --cov-report term-missing --cov=funAD > result.log)
 
       - name: check success or pass for test coverage
         run: (cd tests && ./check_coverage.sh pytest)
