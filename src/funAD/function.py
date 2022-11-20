@@ -20,8 +20,8 @@ class function:
         Record user defined function.
 		
         ----------
-        f : user defined function
-            A function that takes in a vector or scalar of x and compute arithmetic result.
+        f : user defined function(s)
+            A function or a list of functions that takes in a vector of x or one x as a scalar and compute arithmetic result.
 
         """
         if len(f) == 1:
