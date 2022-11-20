@@ -21,10 +21,10 @@ def exp(x):
   float or DualNumber instance
 
   '''
-  if isinstance(self,DualNumber):
-    return DualNumber(np.exp(self.real), np.exp(self.real)*self.dual)
+  if isinstance(x,DualNumber):
+    return DualNumber(np.exp(x.real), np.exp(x.real)*x.dual)
   else:
-    return np.exp(self)
+    return np.exp(x)
 
 def log(x):
   '''
@@ -39,10 +39,10 @@ def log(x):
   float or DualNumber instance
 
   '''
-  if isinstance(self,DualNumber):
-    return DualNumber(np.log(self.real), self.dual/self.real)
+  if isinstance(x,DualNumber):
+    return DualNumber(np.log(x.real), x.dual/x.real)
   else:
-    return np.log(self)
+    return np.log(x)
 
 #=================== Trigonometric ===================#
 def sin(x):
