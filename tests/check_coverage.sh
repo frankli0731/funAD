@@ -3,7 +3,7 @@
 # Description: Coverage wrapper around test suite driver script
 # Copyright 2022 Harvard University. All Rights Reserved.
 set -e
-BAR=30
+BAR=70
 
 tool='coverage'
 if [[ $# -gt 0 ]]; then
