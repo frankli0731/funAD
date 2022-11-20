@@ -19,14 +19,6 @@ def exp(self):
   Returns
   -------
   float or DualNumber instance
-      
-  Examples
-  --------
-  Please insert test case
-
-  >>> Please insert test case
-  >>> Please insert test case
-  Please insert test case   
 
   '''
   if isinstance(self,DualNumber):
@@ -45,14 +37,6 @@ def log(self):
   Returns
   -------
   float or DualNumber instance
-      
-  Examples
-  --------
-  Please insert test case
-
-  >>> Please insert test case
-  >>> Please insert test case
-  Please insert test case   
 
   '''
   if isinstance(self,DualNumber):
@@ -131,13 +115,6 @@ def tan(x):
   -------
   float or DualNumber instance
       
-  Examples
-  --------
-  Please insert test case
-
-  >>> Please insert test case
-  >>> Please insert test case
-  Please insert test case   
   '''
   if isinstance(x,DualNumber):
     return DualNumber(np.tan(x.real), x.dual/(np.cos(x.real)**2))
@@ -156,13 +133,6 @@ def arcsin(x):
   -------
   float or DualNumber instance
       
-  Examples
-  --------
-  Please insert test case
-
-  >>> Please insert test case
-  >>> Please insert test case
-  Please insert test case   
   '''
   if isinstance(x,DualNumber):
     return DualNumber(np.arcsin(x.real),x.dual/np.sqrt(1-x.real**2))
@@ -181,13 +151,6 @@ def arccos(x):
   -------
   float or DualNumber instance
       
-  Examples
-  --------
-  Please insert test case
-
-  >>> Please insert test case
-  >>> Please insert test case
-  Please insert test case   
   '''
   if isinstance(x,DualNumber):
     return DualNumber(np.arccos(x.real),-1*x.dual/np.sqrt(1-x.real**2))
@@ -206,13 +169,6 @@ def arctan(x):
   -------
   float or DualNumber instance
       
-  Examples
-  --------
-  Please insert test case
-
-  >>> Please insert test case
-  >>> Please insert test case
-  Please insert test case   
   '''
   if isinstance(x,DualNumber):
     return DualNumber(np.arctan(x.real),x.dual/(1+x.real**2))
@@ -231,14 +187,7 @@ def sinh(x):
   Returns
   -------
   float or DualNumber instance
-      
-  Examples
-  --------
-  Please insert test case
 
-  >>> Please insert test case
-  >>> Please insert test case
-  Please insert test case   
   '''
   if isinstance(x,DualNumber):
     return DualNumber(np.sinh(x.real),x.dual*np.cosh(x.real))
@@ -256,14 +205,7 @@ def cosh(x):
   Returns
   -------
   float or DualNumber instance
-      
-  Examples
-  --------
-  Please insert test case
 
-  >>> Please insert test case
-  >>> Please insert test case
-  Please insert test case   
   '''
   if isinstance(x,DualNumber):
     return DualNumber(np.cosh(x.real),x.dual*np.sinh(x.real))
@@ -282,13 +224,6 @@ def tanh(x):
   -------
   float or DualNumber instance
       
-  Examples
-  --------
-  Please insert test case
-
-  >>> Please insert test case
-  >>> Please insert test case
-  Please insert test case   
   '''
   if isinstance(x,DualNumber):
     return DualNumber(np.tanh(x.real),x.dual/np.cosh(x.real)**2)
