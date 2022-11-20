@@ -8,7 +8,7 @@ This module implement overloading functions to handle arithmetic for dual number
 import numpy as np
 from .dual_number import DualNumber
 
-def exp(self):
+def exp(x):
   '''
   Overloads the exponential function. 
 
@@ -26,7 +26,7 @@ def exp(self):
   else:
     return np.exp(self)
 
-def log(self):
+def log(x):
   '''
   Overloads the natural logarithm function. 
 
