@@ -100,7 +100,7 @@ class function:
         x : array_like
             An array of numeric values (int or float) as independent variables.
             It could be a scalar (int or float).
-		p : array_like
+	p : array_like
             An array of numeric values (int or float) as seed directional vector.
             It could be a scalar (int or float).
 			
