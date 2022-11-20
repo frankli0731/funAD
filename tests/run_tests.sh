@@ -5,6 +5,7 @@ set -e
 tests=(
     test_function.py
     test_dualnumber.py
+    test_operations.py
 )
 # Must add the module source path because we use `import cs107_package` in
 # our test suite.  This is necessary if you want to test in your local
