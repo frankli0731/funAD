@@ -109,6 +109,31 @@ class TestDualNumber():
         # test division (dual number / float)
         d3=d1/float_num
         assert d3.real == real1/float_num and d3.dual == dual1
+    
+    def test_pow(self):
+        real1=1
+        dual1=2
+        d1=DualNumber(real1,dual1)
+        
+        real2=3
+        dual2=4
+        d2=DualNumber(real2,dual2)
+        
+        int_num=int(1)
+        float_num=float(1.0)
+        
+        # test power operator (dual number ** dual number)
+        d3 = d1**d2
+        assert d3.real == 1 and d3.dual == 6 + np.log(real1)
+
+        # test power operator (dual number ** int)
+        d3=d1**int_num
+        d2/=int_num
+        assert d3.real == real1**int_num and d3.dual == dual1**int_num
+
+        # test /= operator (dual number ** float)
+        d3=d1**float_num
+        assert d3.real == real1**int_num and d3.dual == dual1**int_num
 
     # reflective operators
     def test_radd(self):
@@ -201,6 +226,22 @@ class TestDualNumber():
         d2=DualNumber(real2,dual2)
         d2+=float_num
         assert d2.real == real2+float_num and d2.dual == dual2
+    
+    def test_rpow(self):
+        real1=2
+        dual1=1
+        d1=DualNumber(real1,dual1)
+        
+        int_num=int(2)
+        float_num=float(2.0)
+        
+        # test power operator (int ** dual number)
+        d3 = int_num ** d1
+        assert d3.real == int_num**real1 and d3.dual == np.log(2) * 2 ** 2
+
+        # test power operator (float ** int)
+        d3 = float_num ** d1
+        assert d3.real == float_num**real1 and d3.dual == np.log(2) * 2 ** 2
 
     def test_isub(self):
         real1=1
@@ -266,7 +307,7 @@ class TestDualNumber():
         int_num=int(1)
         float_num=float(1.0)
         
-         # test /= operator (dual number /= dual number)
+        # test /= operator (dual number /= dual number)
         d1/=d2
         assert d1.real == real1/real2 and d1.dual == (dual1*real2-real1*dual2)/(real2*real2)
 
