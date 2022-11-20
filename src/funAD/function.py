@@ -21,7 +21,7 @@ class function:
 		
         ----------
         f : user defined function(s)
-            A function or a list of functions that takes in a vector of x or one x as a scalar and compute arithmetic result.
+            A function or multiple functions that takes in a vector of x or one x as a scalar and compute arithmetic result.
 
         """
         if len(f) == 1:
@@ -93,7 +93,7 @@ class function:
 
     def _grad(self,x,p):
         """
-         A helper function that computes the derivative w.r.t. each input.
+        Computes the derivative w.r.t. each input.
 		
         Parameters
         ----------
