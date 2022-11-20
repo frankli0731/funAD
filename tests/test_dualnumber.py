@@ -15,6 +15,8 @@ class TestDualNumber():
         dual1=2
         d1=DualNumber(real1,dual1)
         assert d1.real == real1 and d1.dual == dual1
+        d2=DualNumber(real1)
+        assert d1.real == real1 and d2.dual == 1
         
     def test_add(self):
         real1=1
