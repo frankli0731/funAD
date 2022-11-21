@@ -21,7 +21,7 @@ class DualNumber(object):
     
     def __init__(self,real,dual = None):
         """
-        Specify the real and dual part of a dual number
+        Specify the real and dual part of a dual number.
 
         Parameters
         ----------
