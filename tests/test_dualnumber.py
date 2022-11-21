@@ -41,6 +41,13 @@ class TestDualNumber():
         d3 = d1+float_num
         assert d3.real == real1+float_num and d3.dual == dual1
 
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d3 = d1+complex_num
+
+        
+
     def test_sub(self):
         real1=1
         dual1=2
@@ -63,6 +70,11 @@ class TestDualNumber():
         float_num=float(1.0)
         d3 = d1-float_num
         assert d3.real == real1-float_num and d3.dual == dual1
+
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d3 = d1-complex_num
     
     def test_mul(self):
         real1=1
@@ -88,6 +100,11 @@ class TestDualNumber():
         d3=d1*float_num
         assert d3.real == real1*float_num and d3.dual == dual1
 
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d3 = d1*complex_num
+
     def test_truediv(self):
         real1=1
         dual1=2
@@ -111,6 +128,11 @@ class TestDualNumber():
         # test division (dual number / float)
         d3=d1/float_num
         assert d3.real == real1/float_num and d3.dual == dual1
+        
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d3 = d1/complex_num
     
     def test_pow(self):
         real1=1
@@ -137,6 +159,11 @@ class TestDualNumber():
         d3=d1**float_num
         assert d3.real == real1**int_num and d3.dual == dual1**int_num
 
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d3 = d1**complex_num
+
     # reflective operators
     def test_radd(self):
         real1=1
@@ -154,6 +181,11 @@ class TestDualNumber():
         float_num=float(1.0)
         d3 = float_num+d1
         assert d3.real == real1+float_num and d3.dual == dual1
+
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d3 = complex_num+d1
         
     def test_rsub(self):
         real1=1
@@ -170,6 +202,11 @@ class TestDualNumber():
         # test subtraction (float-dual number)
         d3 = float_num-d1
         assert d3.real == float_num - real1 and d3.dual == -dual1
+
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d3 = complex_num-d1
     
     def test_rmul(self):
         real1=1
@@ -186,6 +223,11 @@ class TestDualNumber():
         # test multiplication (float * dual number)
         d3=float_num*d1
         assert d3.real == real1*float_num and d3.dual == dual1
+
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d3 = complex_num*d1
         
     def test_rtruediv(self):
         real1=1
@@ -202,6 +244,11 @@ class TestDualNumber():
         # test division (float / dual number)
         d3=float_num/d1
         assert d3.real == float_num/real1 and d3.dual == -1*dual1*float_num/(real1*real1)
+
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d3 = complex_num/d1
     
     def test_iadd(self):
         real1=1
@@ -228,6 +275,12 @@ class TestDualNumber():
         d2=DualNumber(real2,dual2)
         d2+=float_num
         assert d2.real == real2+float_num and d2.dual == dual2
+
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d2 += complex_num
+
     
     def test_rpow(self):
         real1=2
@@ -244,6 +297,11 @@ class TestDualNumber():
         # test power operator (float ** int)
         d3 = float_num ** d1
         assert d3.real == float_num**real1 and d3.dual == np.log(2) * 2 ** 2
+
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d3 = complex_num**d1
 
     def test_isub(self):
         real1=1
@@ -271,6 +329,11 @@ class TestDualNumber():
         d2-=float_num
         assert d2.real == real2-float_num and d2.dual == dual2
 
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d2 -= complex_num
+
     def test_imul(self):
         real1=1
         dual1=2
@@ -297,6 +360,12 @@ class TestDualNumber():
         d2*=float_num
         assert d2.real == real2*float_num and d2.dual == dual2
 
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d2 *= complex_num
+
+
     def test_itruediv(self):
         real1=1
         dual1=2
@@ -322,33 +391,13 @@ class TestDualNumber():
         d2=DualNumber(real2,dual2)
         d2/=float_num
         assert d2.real == real2/float_num and d2.dual == dual2
-    
-    # def test_sin(self):
-    #     real1=1
-    #     dual1=2
-    #     d1=DualNumber(real1,dual1)
-        
-    #     # test sin operator
-    #     d2 = DualNumber.sin(d1)
-    #     assert d2.real == np.sin(real1) and d2.dual == dual1*np.cos(real1)
-        
-    # def test_cos(self):
-    #     real1=1
-    #     dual1=2
-    #     d1=DualNumber(real1,dual1)
-        
-    #     # test cos operator
-    #     d2 = DualNumber.cos(d1)
-    #     assert d2.real == np.cos(real1) and d2.dual == -1*np.sin(real1)*dual1
-        
-    # def test_exp(self):
-    #     real1=1
-    #     dual1=2
-    #     d1=DualNumber(real1,dual1)
-    #     # test exp operator
-    #     d2 = DualNumber.exp(d1)
-    #     assert d2.real == np.exp(real1) and d2.dual == np.exp(real1)*dual
-    
+
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d2 /= complex_num
+
+
     def test_neg(self):
         real1=1
         dual1=2
@@ -356,6 +405,12 @@ class TestDualNumber():
         # test negation operator
         d2 = -d1
         assert d2.real == -real1 and d2.dual == -dual1
+
+        # unsupported type error
+        complex_num = 5+2j
+        with pytest.raises(TypeError):
+            d2 = -complex_num
+
     
     # def test_pos(self):
     #     real1=1
