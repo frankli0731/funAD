@@ -53,7 +53,7 @@ class TestOperations():
         assert d2.real == np.tan(real1) and d2.dual == 1/np.cos(real1)**2*dual1
 
     def test_arcsin(self):
-        real1=1
+        real1=1/2
         dual1=2
         d1=DualNumber(real1,dual1)
         # test arcsin operator
@@ -61,7 +61,7 @@ class TestOperations():
         assert d2.real == np.arcsin(real1) and d2.dual == 1/np.sqrt(1-real1**2)*dual1
 
     def test_arccos(self):
-        real1=1
+        real1=1/2
         dual1=2
         d1=DualNumber(real1,dual1)
         # test arccos operator
