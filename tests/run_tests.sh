@@ -16,7 +16,7 @@ export PYTHONPATH="$(pwd -P)/../src":${PYTHONPATH}
 if [[ $# -gt 0 && ${1} == 'coverage' ]]; then
     driver="${@} -m unittest"
 elif [[ $# -gt 0 && ${1} == 'pytest' ]]; then
-    driver="${@} --ignore-glob='*__main__.py'"
+    driver="${@}"
 elif [[ $# -gt 0 && ${1} == 'CI' ]]; then
     # Assumes the package has been installed and dependencies resolved.  This
     # would be the situation for a customer.  Uses `pytest` for testing.
