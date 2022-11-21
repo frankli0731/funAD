@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "funAD"
-version = "0.0.5"
+version = "0.0.7"
 authors = [
   { name="Hanlin Zhu", email="hzhu@g.harvard.edu" },
   { name="Xu Tang", email="xutang@g.harvard.edu" },
@@ -13,7 +13,7 @@ authors = [
 ]
 description = "funAD is a PyPi-distributed package that executes forward-mode of automatic differentiation, enabling users to solve functional derivatives with high computational efficiency and machine precision."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.5"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: BSD License",
