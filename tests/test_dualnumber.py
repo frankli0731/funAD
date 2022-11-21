@@ -405,12 +405,6 @@ class TestDualNumber():
         # test negation operator
         d2 = -d1
         assert d2.real == -real1 and d2.dual == -dual1
-
-        # unsupported type error
-        complex_num = 5+2j
-        with pytest.raises(TypeError):
-            d2 = -complex_num
-
     
     # def test_pos(self):
     #     real1=1
