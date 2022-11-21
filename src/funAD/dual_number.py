@@ -82,7 +82,7 @@ class DualNumber(object):
         
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
         if isinstance(other, self._supported_scalars):
             return DualNumber(self.real+other, self.dual)
         else:
@@ -124,7 +124,7 @@ class DualNumber(object):
         
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
         if isinstance(other, self._supported_scalars):
             return DualNumber(self.real - other, self.dual)
         else:
@@ -150,7 +150,7 @@ class DualNumber(object):
         
         '''
         if not isinstance(other, self._supported_scalars):
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
         else:
             return DualNumber(other - self. real, - self.dual)
 
@@ -174,7 +174,7 @@ class DualNumber(object):
 
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
         if isinstance(other, self._supported_scalars):
             return DualNumber(self.real * other, self.dual * other)
         else:
@@ -221,7 +221,7 @@ class DualNumber(object):
         
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
         elif isinstance(other, self._supported_scalars):
             return DualNumber(self.real**other, other*self.real**(other-1)*self.dual)
         else:
@@ -247,7 +247,7 @@ class DualNumber(object):
         
         '''
         if not isinstance(other, self._supported_scalars):
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
         other = DualNumber(other,0)
         return other.__pow__(self)
         
@@ -282,7 +282,7 @@ class DualNumber(object):
             
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
         elif isinstance(other, self._supported_scalars):
             return DualNumber(self.real/other, self.dual/other)
         else:
@@ -310,7 +310,7 @@ class DualNumber(object):
         if isinstance(other, self._supported_scalars):
             return DualNumber(other/self.real, (-1*other*self.dual)/(self.real*self.real))    
         else:
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
 
     #=================== inplace operation ===================#
     def __iadd__(self,other):
@@ -328,7 +328,7 @@ class DualNumber(object):
         
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
         elif isinstance(other, self._supported_scalars):
             self.real += other
             return self
@@ -352,7 +352,7 @@ class DualNumber(object):
         
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
         elif isinstance(other, self._supported_scalars):
             self.real -= other
             return self
@@ -376,7 +376,7 @@ class DualNumber(object):
         
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
         elif isinstance(other, self._supported_scalars):
             self.real *= other
             self.dual *= other
@@ -405,7 +405,7 @@ class DualNumber(object):
             
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
-            raise TypeError(f"Unsuported type '{type(other)}'")
+            raise TypeError(f"Unsupported type '{type(other)}'")
         elif isinstance(other, self._supported_scalars):
             self.real /= other
             self.dual /= other
