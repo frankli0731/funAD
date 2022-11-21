@@ -253,7 +253,7 @@ class DualNumber(object):
         
     def __neg__(self):
         '''
-        Change the sign of input dual number by multiplying real and dual part with -1.
+        Flip the sign of input dual number by negating its dual part and real part respectively.
         
         Returns
         -------
