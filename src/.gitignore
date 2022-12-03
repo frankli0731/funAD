@@ -1,0 +1,11 @@
+**/__pycache__
+*.pyc
+.DS_Store
+
+*~
+*.txt
+**/*.egg-info
+**/
+
+*.egg-info
+
