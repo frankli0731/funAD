@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "funAD"
-version = "0.0.9"
+version = "0.1.0"
 authors = [
   { name="Hanlin Zhu", email="hzhu@g.harvard.edu" },
   { name="Xu Tang", email="xutang@g.harvard.edu" },
