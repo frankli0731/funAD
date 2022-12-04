@@ -678,14 +678,16 @@ class function:
         results = []
         for f in self.function_list:
             try:
-                result = f(x)
+                result = f(*x)
             except TypeError:
                 try:
-                    result = f(*x)
+                    result = f(x)
                 except TypeError:
                     raise TypeError ('Function fails to process given input.')
             results.append(result)
+        results = np.array(results)
         return results
+
 
     def __call__(self,*x):
         """
@@ -709,7 +711,11 @@ class function:
         x = np.array(x).reshape(-1) #accepting all kinds of input and make them into 1-d array
         if len(x) != self.x_dim:
             raise ValueError('Dimension Mismatch')
-        return np.array(self._plugin(x))
+        result = self._plugin(x)
+        if result.shape[0] == 1:
+            return result[0]
+        else: 
+            return result
 
     def grad(self,*x):
         """
@@ -736,14 +742,16 @@ class function:
         for i in range(self.x_dim):  
             p = np.identity(self.x_dim)[:,i].tolist()
             J.append(self._grad(x,p))
-        result = np.array(J).T #n x m result
-
-        #putting into desired dimension
-        if result.shape[0] == 1:
-            result = result[0,:]
-        if result.shape[0] == 1:
-            result = result[:,0]
-        return result
+        result = np.array(J).T
+        #putting into desired dimension, can be modified, right now we return 1-d array for R1 to Rn and Rm to R1
+        if result.shape[0] == 1 and result.shape[1] ==1:
+            return result[0,0]
+        elif result.shape[0] == 1:
+            return result[0,:]
+        elif result.shape[1] == 1:
+            return result[:,0]
+        else: 
+            return result
 
     def _grad(self,x,p):
         """
@@ -836,23 +844,32 @@ class Adam(Optimizer):
             if verbose:
                     history.append((x,f(x)))
         if verbose:
-            return x,f(x),history
+            return x, f(x), history
         else:
-            return x,f(x)
+            return x, f(x)
 
 
 
 if __name__=='__main__':
 
-    # R2
+    # R2 to R2
     def fcn_f_R2(x1,x2):
         return x1**4-100
     def fcn_g_R2(x1,x2):
         return sin(exp(x1))
     fcn2 = function(fcn_f_R2,fcn_g_R2,x_dim=2)
+    print(fcn2(1,2))
+    print(fcn2.grad(1,2))
 
-    adam = Adam(max_iteration=10000)
+    # R1 to R1
+    def fcn_R1(x1):
+        return sin(exp(x1)) + 6 * (cos(x1)) / x1 - 2 * x1
+        
+    fcn = function(fcn_R1)
+    print(fcn(1))
+    print(fcn.grad(1))
+
+    adam = Adam()
     x, min, history = adam.minimize(fcn_f_R2, x_dim = 2,verbose=True)
     print(min)
-
 
