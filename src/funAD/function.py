@@ -3,10 +3,9 @@
 This module implements function class, a key component for forward mode autodifferentiation.
 
 """
-
-from collections.abc import Iterable 
 import numpy as np
 from .dual_number import DualNumber
+#from .optimizers import * if need to realize min/max feature in function interface
 
 class function:
     '''
@@ -24,11 +23,21 @@ class function:
             A function or multiple functions that takes in a vector of x or one x as a scalar and compute arithmetic result.
 
         """
-        if len(f) == 1:
-            self.f = f[0]
-        else:
-            self.f = lambda *x: [f(*x) for f in f]
         self.x_dim = x_dim
+        self.function_list = f #list of functions each returning one output
+
+    def _plugin(self,x): # x is an iterable
+        results = []
+        for f in self.function_list:
+            try:
+                result = f(x)
+            except TypeError:
+                try:
+                    result = f(*x)
+                except TypeError:
+                    raise TypeError ('Function fails to process given input.')
+            results.append(result)
+        return results
 
     def __call__(self,*x):
         """
@@ -48,7 +57,11 @@ class function:
             A function evaluated at x. 
 			
         """
-        return self.f(*x)
+        # Preprocess x
+        x = np.array(x).reshape(-1) #accepting all kinds of input and make them into 1-d array
+        if len(x) != self.x_dim:
+            raise ValueError('Dimension Mismatch')
+        return np.array(self._plugin(x))
 
     def grad(self,*x):
         """
@@ -66,30 +79,23 @@ class function:
             Jacobian matrix for given function.
 
         """
-        self.array_type_input = False
-
-        if len(x) == 1: #single input
-            if isinstance(x[0],Iterable): # if the input is iterable, has len() function
-                self.array_type_input = True
-                x = x[0]
-                if len(x) != self.x_dim:
-                    raise ValueError('Dimension Mismatch')
-            else: # sinle input x
-                if self.x_dim != 1:
-                    raise ValueError('Dimension Mismatch')
-
-        else: #multiple input
-            if len(x)!=self.x_dim :
-                raise ValueError('Dimension Mismatch')
-
+        # Preprocess x
+        x = np.array(x).reshape(-1) #accepting all kinds of input and make them into 1-d array
+        if len(x) != self.x_dim:
+            raise ValueError('Dimension Mismatch')
+        
         J = []
         for i in range(self.x_dim):  
             p = np.identity(self.x_dim)[:,i].tolist()
             J.append(self._grad(x,p))
-        if len(J) == 1:
-            return J[0]
-        else:
-            return np.array(J).T
+        result = np.array(J).T #n x m result
+
+        #putting into desired dimension
+        if result.shape[0] == 1:
+            result = result[0,:]
+        if result.shape[0] == 1:
+            result = result[:,0]
+        return result
 
     def _grad(self,x,p):
         """
@@ -111,11 +117,17 @@ class function:
 
         """
         dual_nums = [DualNumber(*input) for input in zip(x,p)]
-        if self.array_type_input == True:
-            result = self.f(dual_nums)
-        else:
-            result = self.f(*dual_nums)
-        if isinstance(result,DualNumber):
-            return result.dual
-        else:
-            return np.array([d.dual for d in result])
+        results = self._plugin(dual_nums)
+        return np.array([result.dual for result in results])
+    
+    # def min(self, x0 = None, optimizer='gd', neg = False, **kwargs):
+    #     if optimizer.lower() == 'gd':
+    #         gd = GD(**kwargs)
+    #         x_star,f_min = gd(self,x0)
+    #     elif optimizer.lower() == 'adam':
+    #         adam = Adam(**kwargs)
+    #             x_star,f_min = adam(f,x0)
+    #     else:
+    #         raise ValueError('Unidentified optimizer')
+    #     return x,f_min
+        
