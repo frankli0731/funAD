@@ -68,7 +68,7 @@ class Adam(Optimizer):
             if verbose:
                     history.append((x,f(x)))
         if verbose:
-            return x,f(x),history
+            return x,f(x), history
         else:
             return x,f(x)
 
