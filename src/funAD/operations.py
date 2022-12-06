@@ -26,9 +26,9 @@ def exp(x):
   else:
     return np.exp(x)
 
-def log(x):
+def _log(x):
   '''
-  Overloads the natural logarithm function. 
+  Computes the natural logarithm. 
 
   Parameters
   ----------
@@ -43,6 +43,57 @@ def log(x):
     return DualNumber(np.log(x.real), x.dual/x.real)
   else:
     return np.log(x)
+
+def log(x,base=None):
+  '''
+  Overloads the logarithm function for any base
+
+  Parameters
+  ----------
+  x : int or float or DualNumber instance
+  base: int or float or DualNumber instance
+
+  Returns
+  -------
+  float or DualNumber instance
+
+  '''
+  if base is None:
+    return _log(x)
+  return _log(x)/_log(base)
+
+def sqrt(x):
+  '''
+  Overloads the non-negative square-root function. 
+
+  Parameters
+  ----------
+  x : int or float or DualNumber instance
+
+  Returns
+  -------
+  float or DualNumber instance
+
+  '''
+  if isinstance(x,DualNumber):
+    return DualNumber(x.real**.5,.5*x.real**-.5*x.dual)
+  else:
+    return np.sqrt(x)
+
+def sigmoid(x):
+  '''
+  Computes the sigmoid function evaluated on x. 
+
+  Parameters
+  ----------
+  x : int or float or DualNumber instance
+
+  Returns
+  -------
+  float or DualNumber instance
+
+  '''
+  return 1/(1+exp(-x))
 
 #=================== Trigonometric ===================#
 def sin(x):
