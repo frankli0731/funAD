@@ -76,7 +76,7 @@ def sqrt(x):
 
   '''
   if isinstance(x,DualNumber):
-    return DualNumber(x.real**.5,.5*x.real**-.5*x.dual)
+    return DualNumber(np.sqrt(x.real),.5*x.real**-.5*x.dual)
   else:
     return np.sqrt(x)
 
