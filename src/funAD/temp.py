@@ -776,16 +776,29 @@ class function:
         results = self._plugin(dual_nums)
         return np.array([result.dual for result in results])
     
+    def min(self, optimizer='gd', x0=None, verbose=False, **kwargs):
+        if optimizer.lower() == 'gd':
+            gd = GD(**kwargs)
+            results = gd.minimize(self,x_dim=self.x_dim,x0=x0,verbose=verbose)
+            return results[1]
+        elif optimizer.lower() == 'adam':
+            adam = Adam(**kwargs)
+            results = adam.minimize(self,x_dim=self.x_dim,x0=x0,verbose=verbose)
+            return results[1]
+        else:
+            raise ValueError('Unidentified optimizer')
+            
 from abc import abstractmethod
 
 
 class Optimizer():
-    def __init__(self, learning_rate = 0.001, max_iteration = 10000):
+    def __init__(self, learning_rate = 0.001, max_iteration = 10000, eps = 1e-15):
         if callable(learning_rate):
             self.eta = learning_rate
         else:
             self.eta = lambda t : learning_rate
         self.max_iteration = max_iteration
+        self.eps = eps
 
     @abstractmethod
     def minimize(self,f, x_dim = 1, x0 = None,verbose=False):
@@ -804,7 +817,11 @@ class GD(Optimizer):
         t = 0
         history = []
         for i in range(self.max_iteration):
-            x = x - self.eta(t)*f.grad(x0)
+            x_new = x - self.eta(t)*f.grad(x)
+            if abs(f(x)-f(x_new)) < self.eps:
+                x = x_new
+                break
+            x = x_new
             t += 1
             if verbose:
                 history.append((x,f(x)))
@@ -812,9 +829,17 @@ class GD(Optimizer):
             return x,f(x),history
         else:
             return x,f(x)
+    def maximize(self,f, x_dim = 1, x0 = None,verbose=False):
+        if isinstance(f,function):
+            if len(f.function_list) > 1:
+                raise TypeError("Cannot optimize vector-valued function")
+            neg_f = function(lambda *x: -1*f.function_list[0](*x),x_dim=x_dim)
+        else:
+            neg_f = function(lambda *x: -1*f(*x),x_dim = x_dim)
+        return self.minimize(neg_f,x_dim=x_dim,x0=x0,verbose=verbose)
 
 class Adam(Optimizer):
-    def __init__(self, learning_rate=0.001, max_iteration = 10000, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-07):
+    def __init__(self, learning_rate=0.001, max_iteration = 10000, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08):
         super().__init__(learning_rate, max_iteration)
         self.beta_1 = beta_1
         self.beta_2 = beta_2
@@ -837,39 +862,48 @@ class Adam(Optimizer):
             g = f.grad(x)
             m = self.beta_1 * m + (1-self.beta_1)*g
             v = self.beta_2 * v + (1-self.beta_2)*g**2
-            m_hat = m/(1-self.beta_1)
-            v_hat = v/(1-self.beta_2)
-            x = x - self.eta(t)/np.sqrt(v_hat+self.epsilon)*m_hat
+            m_hat = m/(1-self.beta_1**(t+1))
+            v_hat = v/(1-self.beta_2**(t+1))
+            x_new = x - self.eta(t)/np.sqrt(v_hat+self.epsilon)*m_hat
+            if abs(f(x)-f(x_new)) < self.eps:
+                x = x_new
+                break
+            x = x_new
             t += 1
             if verbose:
                     history.append((x,f(x)))
         if verbose:
-            return x, f(x), history
+            return x,f(x), history
         else:
-            return x, f(x)
+            return x,f(x)
 
 
 
 if __name__=='__main__':
 
-    # R2 to R2
-    def fcn_f_R2(x1,x2):
-        return x1**4-100
-    def fcn_g_R2(x1,x2):
-        return sin(exp(x1))
-    fcn2 = function(fcn_f_R2,fcn_g_R2,x_dim=2)
-    print(fcn2(1,2))
-    print(fcn2.grad(1,2))
+    # # R2 to R2
+    # def fcn_f_R2(x1,x2):
+    #     return x1**4-100
+    # def fcn_g_R2(x1,x2):
+    #     return sin(exp(x1))
+    # fcn2 = function(fcn_f_R2,fcn_g_R2,x_dim=2)
+    # print(fcn2(1,2))
+    # print(fcn2.grad(1,2))
 
-    # R1 to R1
-    def fcn_R1(x1):
-        return sin(exp(x1)) + 6 * (cos(x1)) / x1 - 2 * x1
+    # # R1 to R1
+    # def fcn_R1(x1):
+    #     return sin(exp(x1)) + 6 * (cos(x1)) / x1 - 2 * x1
         
-    fcn = function(fcn_R1)
-    print(fcn(1))
-    print(fcn.grad(1))
+    # fcn = function(fcn_R1)
+    # print(fcn(1))
+    # print(fcn.grad(1))
 
-    adam = Adam()
-    x, min, history = adam.minimize(fcn_f_R2, x_dim = 2,verbose=True)
-    print(min)
+    # adam = Adam()
+    # x, min, history = adam.minimize(fcn_f_R2, x_dim = 2,verbose=True)
+    # print(min)
+
+    def f1(x):
+        return (x-2)**2+7
+    f1 = function(f1)
+    print(f1.min())
 
