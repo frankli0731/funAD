@@ -56,10 +56,18 @@ class function:
         -------
         f : user defined function
             A function evaluated at x. 
+	    
+        Notes
+        ----------
+        NumPy is known to return nan with integer inputs in cases
+	when a mathematically correct answer should be a float number, 
+        e.g. print([10**c for c in np.arange(-5,5)]) will raise a ValueError in Numpy
+        saying ValueError: Integers to negative integer powers are not allowed.
+        As such we convert all input to float to avoid such issues.
 			
         """
-        # Preprocess x
-        x = np.array(x).reshape(-1) #accepting all kinds of input and make them into 1-d array
+        # Preprocess x accepting all kinds of input and make them into 1-d array
+        x = np.array(x).reshape(-1).astype('float')  # convert numeric input to float to prevent NumPy delegated computation returning exact result for integer input
         if len(x) != self.x_dim:
             raise ValueError('Dimension Mismatch')
         result = self._plugin(x)
