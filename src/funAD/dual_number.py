@@ -219,13 +219,21 @@ class DualNumber(object):
         TypeError
         If the other number input is not of any supported numeric format.   
         
+        Notes
+        ----------
+        Since we delegate power to NumPy and NumPy return integer or nothing when power 
+        is a negative integer when a mathematically correct answer should be a float number, 
+        e.g. print([10**c for c in np.arange(-5,5)]) will raise a ValueError in Numpy
+        saying ValueError: Integers to negative integer powers are not allowed.
+        As such we convert the power numeric terms to float to avoid such issues.
+        
         '''
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsupported type '{type(other)}'")
         elif isinstance(other, self._supported_scalars):
-            return DualNumber(self.real**other, other*self.real**(other-1)*self.dual)
+            return DualNumber(self.real**float(other), other*self.real**float(other-1)*self.dual)
         else:
-            return DualNumber(self.real**other.real,self.real**other.real*(other.real*self.dual/self.real+other.dual*np.log(self.real)))
+            return DualNumber(self.real**float(other.real),self.real**float(other.real)*(other.real*self.dual/self.real+other.dual*np.log(self.real)))
     
     def __rpow__(self,other):
         '''
