@@ -922,10 +922,12 @@ if __name__=='__main__':
     # x, min, history = adam.minimize(fcn_f_R2, x_dim = 2,verbose=True)
     # print(min)
 
-    def f1(x):
-        return -1*(x-2)**2+7
+    def f(x1,x2):
+        return (x1-2)**2 + (x2+3)**2 # analytic minimal should be (2,-3)
     gd = GD()
     adam = Adam()
-    x,fmax,history = adam.maximize(f1,verbose=True)
-    print(history)
+    x,f_min,history = gd.minimize(f,x_dim=2,verbose=True)
+    print(x,f_min)
+    x,f_min,history = adam.minimize(f,x_dim=2,verbose=True)
+    print(x,f_min)
 
