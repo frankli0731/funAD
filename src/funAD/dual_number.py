@@ -223,7 +223,7 @@ class DualNumber(object):
         ----------
         Since we delegate power to NumPy and NumPy return integer or nothing when power 
         is a negative integer when a mathematically correct answer should be a float number, 
-        e.g. print([10**float(c) for c in np.arange(-5,5)]) will raise a ValueError in Numpy
+        e.g. print([10**c for c in np.arange(-5,5)]) will raise a ValueError in Numpy
         saying ValueError: Integers to negative integer powers are not allowed.
         As such we convert the power numeric terms to float to avoid such issues.
         
