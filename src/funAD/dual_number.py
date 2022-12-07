@@ -229,11 +229,9 @@ class DualNumber(object):
         if not isinstance(other, (*self._supported_scalars, DualNumber)):
             raise TypeError(f"Unsupported type '{type(other)}'")
         elif isinstance(other, self._supported_scalars):
-            other = float(other)
-            return DualNumber(self.real**other, other*self.real**(other-1)*self.dual)
+            return DualNumber(self.real**float(other), other*self.real**float(other-1)*self.dual)
         else:
-            other.real, other.dual = float(other.real), float(other.dual)
-            return DualNumber(self.real**other.real,self.real**other.real*(other.real*self.dual/self.real+other.dual*np.log(self.real)))
+            return DualNumber(self.real**float(other.real),self.real**float(other.real)*(other.real*self.dual/self.real+other.dual*np.log(self.real)))
     
     def __rpow__(self,other):
         '''
