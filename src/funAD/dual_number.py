@@ -232,7 +232,7 @@ class DualNumber(object):
             other = float(other)
             return DualNumber(self.real**other, other*self.real**(other-1)*self.dual)
         else:
-            other = float(other)
+            other.real, other.dual = float(other.real), float(other.dual)
             return DualNumber(self.real**other.real,self.real**other.real*(other.real*self.dual/self.real+other.dual*np.log(self.real)))
     
     def __rpow__(self,other):
