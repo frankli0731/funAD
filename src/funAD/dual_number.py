@@ -269,6 +269,127 @@ class DualNumber(object):
         
         '''
         return DualNumber(- self.real , - self.dual)
+    
+    def __eq__(self, other):
+        '''
+        Compare the real part of two numbers.
+
+        Parameters
+        ----------
+        other: int or float or DualNumber instance
+        
+        Returns
+        -------
+        Boolean 
+        
+        '''
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsupported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            return self.real == other
+        else:
+            return self.real == other.real
+    
+    def __ne__(self, other):
+        '''
+        Compare the real part of two numbers.
+
+        Parameters
+        ----------
+        other: int or float or DualNumber instance
+        
+        Returns
+        -------
+        Boolean 
+        
+        '''
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsupported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            return not self.real == other
+        else:
+            return not self.real == other.real
+    
+    def __lt__(self, other):
+        '''
+        Compare the real part of two numbers using "<"
+
+        Parameters
+        ----------
+        other: int or float or DualNumber instance
+        
+        Returns
+        -------
+        Boolean 
+        
+        '''
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsupported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            return self.real < other
+        else:
+            return self.real < other.real
+    
+    def __le__(self, other):
+        '''
+        Compare the real part of two numbers using "<="
+
+        Parameters
+        ----------
+        other: int or float or DualNumber instance
+        
+        Returns
+        -------
+        Boolean 
+        
+        '''
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsupported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            return self.real <= other
+        else:
+            return self.real <= other.real
+    
+    def __gt__(self, other):
+        '''
+        Compare the real part of two numbers using ">"
+
+        Parameters
+        ----------
+        other: int or float or DualNumber instance
+        
+        Returns
+        -------
+        Boolean 
+        
+        '''
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsupported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            return self.real > other
+        else:
+            return self.real > other.real
+    
+    def __ge__(self, other):
+        '''
+        Compare the real part of two numbers using ">="
+
+        Parameters
+        ----------
+        other: int or float or DualNumber instance
+        
+        Returns
+        -------
+        Boolean 
+        
+        '''
+        if not isinstance(other, (*self._supported_scalars, DualNumber)):
+            raise TypeError(f"Unsupported type '{type(other)}'")
+        elif isinstance(other, self._supported_scalars):
+            return self.real >= other
+        else:
+            return self.real >= other.real
+
 
     def __truediv__(self, other):
         '''
