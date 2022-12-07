@@ -20,12 +20,22 @@ class function:
         ----------
         f : user defined function(s)
             A function or multiple functions that takes in a vector of x or one x as a scalar and compute arithmetic result.
-
+        x_dim : int
+            Specify how many independent variables there are in all input functions.
+	    
         """
         self.x_dim = x_dim
         self.function_list = f #list of functions each returning one output
 
     def _plugin(self,x): # x is an iterable
+        """
+        Process independent variables as a vector input.
+		
+        ----------
+        x : int or float or array-like of numeric values.
+            Specify how many independent variables there are in all input functions.
+	    
+        """
         results = []
         for f in self.function_list:
             try:
