@@ -117,5 +117,18 @@ class TestOperations():
         d3 = op.tanh(real1)
         assert d3 == np.tanh(real1)
 
+    def test_log(self):
+        real1=7
+        dual1=8
+        d1=DualNumber(real1,dual1)
+        
+        # test log operator
+        # natural log
+        d2 = op.log(d1)
+        assert d2.real == np.log(real1) and d2.dual == dual1/real1
+        # base specified
+        d3 = op.log(d2,base=1.1)
+        assert d2.real == np.log(real1) and d2.dual == dual1/real1
+
 if __name__ == "__main__":
     pass
