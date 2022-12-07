@@ -5,7 +5,7 @@ This module implements function class, a key component for forward mode autodiff
 """
 import numpy as np
 from .dual_number import DualNumber
-from .optimizers import GD, Adam
+
 class function:
     '''
     Create a function object to handle evalutation of a function at particular x coordinates
@@ -126,16 +126,4 @@ class function:
         dual_nums = [DualNumber(*input) for input in zip(x,p)]
         results = self._plugin(dual_nums)
         return np.array([result.dual for result in results])
-    
-    def min(self, optimizer='gd', x0=None, verbose=False, **kwargs):
-        if optimizer.lower() == 'gd':
-            gd = GD(**kwargs)
-            results = gd.minimize(self,x_dim=self.x_dim,x0=x0,verbose=verbose)
-            return results[1]
-        elif optimizer.lower() == 'adam':
-            adam = Adam(**kwargs)
-            results = adam.minimize(self,x_dim=self.x_dim,x0=x0,verbose=verbose)
-            return results[1]
-        else:
-            raise ValueError('Unidentified optimizer')
         
