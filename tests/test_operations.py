@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This test suite (a module) runs tests for dual_number of the
+This test suite (a module) runs tests for operation of the
 funAD package.
 """
 import pytest
