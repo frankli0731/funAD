@@ -1,10 +1,35 @@
+# -*- coding: utf-8 -*-
+"""
+This module implements different optimizers classes, which is the key extension functionality for finding local minimum and maximum.
+"""
 from abc import abstractmethod
 import numpy as np
 from .function import function
 
 
 class Optimizer():
+    '''
+    Create a optimizer object to handle general optimization request
+    for user defined learning rate, within maximum iterations and tolerance threshold.
+    '''
     def __init__(self, learning_rate = 0.001, max_iteration = 10000, eps = 1e-15):
+        """
+        Initialize an optimizer.
+		
+        Parameters
+        ----------
+        learning_rate : float
+            User specified step size at each iteration while moving towards the goal of the optimization task.
+        
+        max_iteration : int
+            User specified maximum number of iterations a optimization task should perform.     
+        
+        eps : float
+            User specified tolerance threshold. When an iteration's magnitude of change for independent variable  
+            vector is smaller than the given threshold the optimization task is said to reach the goal and
+            iteration would terminate and produce a final result.
+            
+        """
         if callable(learning_rate):
             self.eta = learning_rate
         else:
@@ -14,6 +39,10 @@ class Optimizer():
 
     @abstractmethod
     def minimize(self,f, x_dim = 1, x0 = None,verbose=False):
+        """
+        A place-holder for minimize method that all children optimizer class must implement.
+        
+        """        
         raise NotImplementedError
 
 class GD(Optimizer):
