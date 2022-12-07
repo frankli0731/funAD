@@ -829,6 +829,7 @@ class GD(Optimizer):
             return x,f(x),history
         else:
             return x,f(x)
+
     def maximize(self,f, x_dim = 1, x0 = None,verbose=False):
         if isinstance(f,function):
             if len(f.function_list) > 1:
@@ -836,7 +837,12 @@ class GD(Optimizer):
             neg_f = function(lambda *x: -1*f.function_list[0](*x),x_dim=x_dim)
         else:
             neg_f = function(lambda *x: -1*f(*x),x_dim = x_dim)
-        return self.minimize(neg_f,x_dim=x_dim,x0=x0,verbose=verbose)
+        if verbose:
+            x,neg_f_min,history = self.minimize(neg_f,x_dim=x_dim,x0=x0,verbose=True)
+            history = [(tup[0],-1*tup[1]) for tup in history]
+            return x,-1*neg_f_min,history
+        x,neg_f_min = self.minimize(neg_f,x_dim=x_dim,x0=x0,verbose=False)
+        return x,-1*neg_f_min
 
 class Adam(Optimizer):
     def __init__(self, learning_rate=0.001, max_iteration = 10000, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08):
@@ -876,6 +882,20 @@ class Adam(Optimizer):
             return x,f(x), history
         else:
             return x,f(x)
+    
+    def maximize(self,f, x_dim = 1, x0 = None,verbose=False):
+        if isinstance(f,function):
+            if len(f.function_list) > 1:
+                raise TypeError("Cannot optimize vector-valued function")
+            neg_f = function(lambda *x: -1*f.function_list[0](*x),x_dim=x_dim)
+        else:
+            neg_f = function(lambda *x: -1*f(*x),x_dim = x_dim)
+        if verbose:
+            x,neg_f_min,history = self.minimize(neg_f,x_dim=x_dim,x0=x0,verbose=True)
+            history = [(tup[0],-1*tup[1]) for tup in history]
+            return x,-1*neg_f_min,history
+        x,neg_f_min = self.minimize(neg_f,x_dim=x_dim,x0=x0,verbose=False)
+        return x,-1*neg_f_min
 
 
 
@@ -903,7 +923,9 @@ if __name__=='__main__':
     # print(min)
 
     def f1(x):
-        return (x-2)**2+7
-    f1 = function(f1)
-    print(f1.min())
+        return -1*(x-2)**2+7
+    gd = GD()
+    adam = Adam()
+    x,fmax,history = adam.maximize(f1,verbose=True)
+    print(history)
 
