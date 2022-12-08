@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """
+
 This module implements different optimizers classes, which is the key extension functionality for finding local minimum and maximum.
+
 """
 from abc import abstractmethod
 import numpy as np
@@ -11,7 +13,9 @@ class Optimizer():
     '''
     Create a optimizer object to handle general optimization request
     for user defined learning rate, within maximum iterations and tolerance threshold.
+    
     '''
+
     def __init__(self, learning_rate = 0.001, max_iteration = 10000, eps = 1e-15):
         """
         Initialize an optimizer.
@@ -46,7 +50,51 @@ class Optimizer():
         raise NotImplementedError
 
 class GD(Optimizer):
+    """
+    Gradient Optimizer Class used to find local minimum or maximum of a given function
+
+    """
     def minimize(self,f, x_dim = 1, x0 = None,verbose=False):
+        """
+        Minimize a function using gradient descent. 
+	Each iteration the algorithm make a step in the steepest descent.
+
+        Parameters
+        ----------
+        f: function class instance
+            The function to minimize.
+        x_dim : int
+            Specify how many independent variables there are in all input functions.
+        x0: int or float or array-like of numeric values.
+            The starting values of the independent variables for the gradietn descent algorithm
+        verbose: bool
+            Whether to return the full iteration history of the gradient descent algorithm
+
+        Returns
+        -------
+        x: int or float or array-like of numeric values. 
+            A scalar x value for scalar input, or vector of x values for vector inputs.
+	    This is the value(s) of independent variable(s) at the found local minimum.
+        f(x): float
+            The value of the function at the minimum
+        history: tuple
+            Each element of the tuple represents one iteration which is also a tuple.
+	    Each element of that iteration tuple is made of two elements: a x tuple and function value at that iteration.
+	    Each x tuple for a iteration is broken down into the corresponding value(s) of independent variable(s) in the input order.
+        
+        Examples
+        --------
+        >>> def f(x_1,x_2):
+        >>>   return (x_1+1)**2 + x_2**2 + 3
+        >>> gd = ad.GD(learning_rate = 0.01, max_iteration = 10000, eps = 1e-12)
+        >>> id_vars, f_min = gd.minimize(f, x_dim=2, x0 = [12, 6])
+	>>> x_1, x_2 = id_vars
+        >>> print(f"the local maximum function value is {f_min:.2f}")
+        the local maximum function value is 3.00
+        >>> print(f"the corresponding independent variable values are x = {x_1:.2f}, y={x_2:.2f}")
+        the corresponding independent variable values are x = -1.00, y=0.00
+	
+        """
         if isinstance(f,function):
             if len(f.function_list) > 1: # only functions with a single output can be minimized
                 raise TypeError("Cannot optimize vector-valued function")
@@ -72,6 +120,47 @@ class GD(Optimizer):
             return x,f(x)
 
     def maximize(self,f, x_dim = 1, x0 = None,verbose=False):
+        """
+        Maximize a function using gradient descent. 
+	Each iteration the algorithm make a step in the steepest ascent.
+	Search for the maximum of -f(x) which makes the iterative process equivalent. 
+
+        Parameters
+        ----------
+        f: function class instance
+            The function to maximize.
+        x_dim : int
+            Specify how many independent variables there are in all input functions.
+        x0: int or float or array-like of numeric values.
+            The starting values of the independent variables for the gradietn descent algorithm
+        verbose: bool
+            Whether to return the full iteration history of the gradient descent algorithm
+
+        Returns
+        -------
+        x: int or float or array-like of numeric values. 
+            A scalar x value for scalar input, or vector of x values for vector inputs.
+	    This is the value(s) of independent variable(s) at the found local maximum.
+        f(x): float
+            The value of the function at the maximum
+        history: tuple
+            Each element of the tuple represents one iteration which is also a tuple.
+	    Each element of that iteration tuple is made of two elements: a x tuple and function value at that iteration.
+	    Each x tuple for a iteration is broken down into the corresponding value(s) of independent variable(s) in the input order.
+        
+        Examples
+        --------
+        >>> def f(x,y):
+        >>>   return -(x+2)*(x+1)-(y+1)*(y+3)
+        >>> gd = ad.GD(learning_rate = 0.2, max_iteration = 6000, eps = 1e-6)
+        >>> id_vars, f_max = gd.maximize(f, x_dim=2, x0 = [3.1, -2])
+	>>> x, y = id_vars
+        >>> print(f"the local maximum function value is {f_max:.2f}")
+        the local maximum function value is 1.25
+        >>> print(f"the corresponding independent variable values are x = {x:.2f}, y={y:.2f}")
+        the corresponding independent variable values are x = -1.50, y=-2.00
+	
+        """
         if isinstance(f,function):
             if len(f.function_list) > 1: # only functions with a single output can be maximized
                 raise TypeError("Cannot optimize vector-valued function")
