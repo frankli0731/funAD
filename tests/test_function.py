@@ -57,12 +57,20 @@ class TestFunction():
             f2.grad([1,2]) 
         with pytest.raises(ValueError):
             f2.grad([2,1,1,1,1],1)
-        
+
         #R1 to R1
         def fcn_R1(x1):
             return funAD.sin(funAD.exp(x1)) + 6 * (funAD.cos(x1)) / x1 - 2 * x1
         fcn = funAD.function(fcn_R1)
         assert round(fcn(1),4) == 1.6526 and round(fcn.grad(1),6) == -12.768989
+        
+        #R1 to R2
+        def fcn_f_R1(x1):
+            return funAD.sin(funAD.exp(x1)) + 6 * (funAD.cos(x1)) / x1 - 2 * x1
+        def fcn_g_R1(x1):
+            return funAD.cos(funAD.exp(x1)) - 2 * x1
+        fcn = funAD.function(fcn_f_R1,fcn_g_R1)
+        assert round(fcn(1)[0],4) == 1.6526 and round(fcn(1)[1],4) == -2.9117 and round(fcn.grad(1)[0],4) == -12.769 and round(fcn.grad(1)[1],4) == -3.1166
         
         # R2 to R1
         def fcn_R2(x1,x2):
