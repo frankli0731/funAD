@@ -302,6 +302,10 @@ class TestDualNumber():
         complex_num = 5+2j
         with pytest.raises(TypeError):
             d3 = complex_num**d1
+            
+        # negative input
+        d4 = (-int_num) ** d1
+        assert d4.real==4 and np.isnan(d4.dual)
 
     def test_isub(self):
         real1=1

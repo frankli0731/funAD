@@ -46,6 +46,9 @@ class TestOperations():
         assert d2.real == np.log(real1) and d2.dual == 1/real1*dual1
         d3 = op.log(real1)
         assert d3 == np.log(real1)
+        # negative input
+        with pytest.raises(ValueError):
+            op.log(-real1)
 
     def test_tan(self):
         real1=1
@@ -140,13 +143,9 @@ class TestOperations():
         assert d2.real == np.sqrt(real1) and d2.dual == 1*1/2*4**(-0.5)
         d3=op.sqrt(4)
         assert d3==2
-        '''
         # negative input case
-        real4=-4
-        d4=DualNumber(real4,dual1)
-        with pytest.raises(ValueError):
-            op.sqrt(d4)
-        '''
+        d4=-real1
+        assert np.isnan(op.sqrt(d4))
 
     def test_sigmoid(self):
         real1=4
