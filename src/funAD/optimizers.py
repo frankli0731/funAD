@@ -11,7 +11,7 @@ from .function import function
 
 class Optimizer():
     '''
-    Create a optimizer object to handle general optimization request
+    Abstract class of optimizer to handle general optimization request
     for user defined learning rate, within maximum iterations and tolerance threshold.
     
     '''
