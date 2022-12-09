@@ -72,8 +72,8 @@ class GD(Optimizer):
 
         Returns
         -------
-        x: int or float or array-like of numeric values. 
-            A scalar x value for scalar input, or vector of x values for vector inputs.
+        x: float or array-like. 
+            A scalar x value for scalar input, or a list of x values for vector inputs.
 	    This is the value(s) of independent variable(s) at the found local minimum.
         f(x): float
             The value of the function at the minimum
@@ -114,6 +114,7 @@ class GD(Optimizer):
             t += 1
             if verbose:
                 history.append((x,f(x)))
+	if len(x) == 1: x=x[0] # unpack scalar input into float number
         if verbose:
             return x,f(x),history
         else:
@@ -138,8 +139,8 @@ class GD(Optimizer):
 
         Returns
         -------
-        x: int or float or array-like of numeric values. 
-            A scalar x value for scalar input, or vector of x values for vector inputs.
+        x: float or array-like. 
+            A scalar x value for scalar input, or a list of x values for vector inputs.
 	    This is the value(s) of independent variable(s) at the found local maximum.
         f(x): float
             The value of the function at the maximum
@@ -208,6 +209,7 @@ class Adam(Optimizer):
             t += 1
             if verbose:
                     history.append((x,f(x)))
+	if len(x) == 1: x=x[0] # unpack scalar input into float number
         if verbose:
             return x,f(x), history
         else:
