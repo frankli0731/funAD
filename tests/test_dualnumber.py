@@ -428,8 +428,11 @@ class TestDualNumber():
         # test equality operator with float number
         assert d1==(float_num)
         assert not(d1==float_num-1.0)
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1=='1'
         
-    def test_neq(self):
+    def test_ne(self):
         real1=1
         dual1=2
         d1=DualNumber(real1,dual1)
@@ -451,6 +454,9 @@ class TestDualNumber():
         # test not equality operator with float number
         assert d1!=(float_num-1.0)
         assert not(d1!=float_num)
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1!='1'
 
     def test_lt(self):
         real1=1
@@ -470,6 +476,9 @@ class TestDualNumber():
         assert d1<int_num
         # test less-than operator with float number
         assert d1<float_num
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1<'2'
         
     def test_gt(self):
         real1=5
@@ -489,6 +498,9 @@ class TestDualNumber():
         assert d1>int_num
         # test greater-than operator with float number
         assert d1>float_num
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1>'0'
 
     def test_le(self):
         real1=1
@@ -517,6 +529,9 @@ class TestDualNumber():
         # test less-than-or-equal operator with float number
         assert d1<=float_num
         assert d1<=float_num2
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1<='1'
         
     def test_ge(self):
         real1=5
@@ -545,6 +560,9 @@ class TestDualNumber():
         # test greater-than-or-equal operator with float number
         assert d1>=float_num
         assert d1>=float_num2
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1>='1'
         
 if __name__ == "__main__":
     pass
