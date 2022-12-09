@@ -114,7 +114,7 @@ class GD(Optimizer):
             t += 1
             if verbose:
                 history.append((x,f(x)))
-	if len(x) == 1: x=x[0] # unpack scalar input into float number
+        if len(x) == 1: x=x[0] # unpack scalar input into float number
         if verbose:
             return x,f(x),history
         else:
@@ -209,7 +209,7 @@ class Adam(Optimizer):
             t += 1
             if verbose:
                     history.append((x,f(x)))
-	if len(x) == 1: x=x[0] # unpack scalar input into float number
+        if len(x) == 1: x=x[0] # unpack scalar input into float number
         if verbose:
             return x,f(x), history
         else:
