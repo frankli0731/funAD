@@ -78,7 +78,7 @@ class GD(Optimizer):
         f(x): float
             The value of the function at the minimum
         history: list
-            Each element of the list represents one iteration which is also a tuple.
+            Each element of the list represents one iteration which is a tuple.
 	    Each element of that iteration tuple is made of two elements: a NumPy array of x's and function value at that iteration.
 	    The NumPy array of x's for a iteration consists of the corresponding value(s) of independent variable(s) in the input order.
         
@@ -144,7 +144,7 @@ class GD(Optimizer):
         f(x): float
             The value of the function at the maximum
         history: list
-            Each element of the list represents one iteration which is also a tuple.
+            Each element of the list represents one iteration which is a tuple.
 	    Each element of that iteration tuple is made of two elements: a NumPy array of x's and function value at that iteration.
 	    The NumPy array of x's for a iteration consists of the corresponding value(s) of independent variable(s) in the input order.
         
