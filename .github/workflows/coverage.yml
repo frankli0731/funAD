@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: python3 -m pip install -U pytest pytest-cov
 
-      - name: Generate report log file for milestone 2
+      - name: Generate report log file for final milestone
         run: (cd tests && ./run_tests.sh pytest --cov-fail-under=90 --cov-report term-missing --cov=funAD > result.log)
 
       - name: check success or pass for test coverage
@@ -28,7 +28,7 @@ jobs:
 
       # Run the test coverage for the build
       - name: Run tests and generate coverage html
-        run: (cd tests && ./run_tests.sh CI --cov=funAD --cov-report=html:htmlcov)
+        run: (cd tests && ./run_tests.sh pytest --cov=funAD --cov-report=html:htmlcov)
 
       # Remove .gitignore file in test coverage data to be pushed to gh-pages
       # branch
