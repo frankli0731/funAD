@@ -16,12 +16,12 @@ class TestOptimizers():
         max_iter=100
         eps=1
         fn = lambda x: lr
-        op = optimizers.Optimizer(learning_rate=lr, max_iteration=max_iter, eps=eps)
+        op = optimizers.Optimizer(learning_rate=lr, max_iteration=max_iter, lazy=False, eps=eps)
         assert callable(op.eta) == True and op.eta.__code__.co_code == fn.__code__.co_code
         assert op.max_iteration==max_iter and op.eps==eps and op.lazy==False
 
         fn2=lambda x: x*x
-        op2 = optimizers.Optimizer(learning_rate=fn2, max_iteration=max_iter, eps=eps)
+        op2 = optimizers.Optimizer(learning_rate=fn2, max_iteration=max_iter, lazy=False, eps=eps)
         assert callable(op2.eta) == True and op2.eta.__code__.co_code == fn2.__code__.co_code
         assert op2.max_iteration==max_iter and op2.eps==eps and op2.lazy==False
 
@@ -58,11 +58,6 @@ class TestGD():
         multi_fcn = function(f,f2)
         with pytest.raises(TypeError):
             gd.minimize(multi_fcn ,x_dim=2,verbose=True)
-
-        # when lazy is set to be True
-        gd = optimizers.GD(lazy=True)
-        x,f_min,history = gd.minimize(f,x_dim=2,verbose=True)
-        assert round(x[0],1)==2.0 and round(x[1],1)==-3.0 and round(f_min,7)==0 and type(history)==list
 
     def test_maximize(self):
         gd = optimizers.GD()
@@ -109,11 +104,6 @@ class TestAdam():
         multi_fcn = function(f,f2)
         with pytest.raises(TypeError):
             adam.minimize(multi_fcn ,x_dim=2,verbose=True)
-
-        # when lazy is set to be True
-        adam = optimizers.Adam(lazy=True)
-        x,f_min,history = adam.minimize(f,x_dim=2,verbose=True)
-        assert round(x[0],1)==2.0 and round(x[1],1)==-3.0 and round(f_min,7)==0 and type(history)==list
 
 
     def test_maximize(self):
