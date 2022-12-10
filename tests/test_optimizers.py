@@ -23,7 +23,7 @@ class TestOptimizers():
         fn2=lambda x: x*x
         op2 = optimizers.Optimizer(learning_rate=fn2, max_iteration=max_iter, eps=eps)
         assert callable(op2.eta) == True and op2.eta.__code__.co_code == fn2.__code__.co_code
-        assert op2.max_iteration==max_iter and op2.eps==eps and op.lazy==False
+        assert op2.max_iteration==max_iter and op2.eps==eps and op2.lazy==False
 
     def test_minimize(self):
         lr=0.5
@@ -86,7 +86,7 @@ class TestGD():
         with pytest.raises(TypeError):
             gd.maximize(multi_fcn ,x_dim=2,verbose=True)
         
-        
+'''        
 class TestAdam():
     
     def test_minimize(self):
@@ -137,3 +137,4 @@ class TestAdam():
         multi_fcn = function(f,f2)
         with pytest.raises(TypeError):
             adam.maximize(multi_fcn ,x_dim=2,verbose=True)
+'''  
