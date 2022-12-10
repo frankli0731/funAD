@@ -4,7 +4,7 @@
 
 ## Brief Introduction
 
-funAD is a PyPi-distributed package that executes forward-mode of automatic differentiation, enabling users to solve functional derivatives with high computational efficiency and machine precision.
+`funAD` is a PyPi-distributed package that executes forward-mode of automatic differentiation, enabling users to solve functional derivatives with high computational efficiency and machine precision.
 
 This project/package is the fruit of Harvard CS107/AC207 class final project in 2022 Fall. Our package utilize forward mode and dual number. Additionally, we also allow users to define their own seeds vector for the Jacobian Matrix and the option to calculate local maxima and minima through gradient descent.
 
