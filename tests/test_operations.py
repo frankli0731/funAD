@@ -145,7 +145,9 @@ class TestOperations():
         assert d3==2
         # negative input case
         d4=-real1
-        assert np.isnan(op.sqrt(d4))
+        with np.errstate(invalid='raise'):
+            with pytest.raises(FloatingPointError):
+                op.sqrt(d4)
 
     def test_sigmoid(self):
         real1=4
