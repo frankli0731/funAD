@@ -1,16 +1,18 @@
 from abc import abstractmethod
+import time
 import numpy as np
 from .function import function
 
 
 class Optimizer():
-    def __init__(self, learning_rate = 0.001, max_iteration = 10000, eps = 1e-15):
+    def __init__(self, learning_rate = 0.001, max_iteration = 10000, lazy = False, eps = 1e-15):
         if callable(learning_rate):
             self.eta = learning_rate
         else:
             self.eta = lambda t : learning_rate
         self.max_iteration = max_iteration
         self.eps = eps
+        self.lazy = lazy # whether stop iterations after the change is less than the threhold eps. True means stop.
 
     @abstractmethod
     def minimize(self,f, x_dim = 1, x0 = None,verbose=False):
@@ -30,7 +32,7 @@ class GD(Optimizer):
         history = []
         for i in range(self.max_iteration):
             x_new = x - self.eta(t)*f.grad(x) # update rule of gradient descent
-            if abs(f(x)-f(x_new)) < self.eps: # break the loop when the change in function is less than eps
+            if self.lazy and (abs(f(x)-f(x_new)) < self.eps): # break the loop when the change in function is less than eps
                 x = x_new
                 break
             x = x_new
@@ -57,8 +59,9 @@ class GD(Optimizer):
         return x,-1*neg_f_min
 
 class Adam(Optimizer):
-    def __init__(self, learning_rate=0.001, max_iteration = 10000, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-08):
-        super().__init__(learning_rate, max_iteration)
+    def __init__(self, learning_rate=0.001, max_iteration = 10000, beta_1 = 0.9, beta_2 = 0.999, epsilon = 1e-07,
+                 lazy = False, eps = 1e-15):
+        super().__init__(learning_rate, max_iteration, lazy, eps)
         self.beta_1 = beta_1
         self.beta_2 = beta_2
         self.epsilon = epsilon
@@ -83,13 +86,13 @@ class Adam(Optimizer):
             m_hat = m/(1-self.beta_1**(t+1))
             v_hat = v/(1-self.beta_2**(t+1))
             x_new = x - self.eta(t)/np.sqrt(v_hat+self.epsilon)*m_hat # update rule of adam
-            if abs(f(x)-f(x_new)) < self.eps: # break the loop when the change in function is less than eps
+            if self.lazy and (abs(f(x)-f(x_new)) < self.eps): # break the loop when the change in function is less than eps
                 x = x_new
                 break
             x = x_new
             t += 1
             if verbose:
-                    history.append((x,f(x)))
+                history.append((x,f(x)))
         if verbose:
             return x,f(x), history
         else:
