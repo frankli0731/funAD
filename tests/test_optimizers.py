@@ -16,14 +16,14 @@ class TestOptimizers():
         max_iter=100
         eps=1
         fn = lambda x: lr
-        op = optimizers.Optimizer(learning_rate=lr, max_iteration=max_iter, lazy=False, eps=eps)
+        op = optimizers.Optimizer(learning_rate=lr, max_iteration=max_iter, eps=eps)
         assert callable(op.eta) == True and op.eta.__code__.co_code == fn.__code__.co_code
-        assert op.max_iteration==max_iter and op.eps==eps and op.lazy==False
+        assert op.max_iteration==max_iter and op.eps==eps
 
         fn2=lambda x: x*x
-        op2 = optimizers.Optimizer(learning_rate=fn2, max_iteration=max_iter, lazy=False, eps=eps)
+        op2 = optimizers.Optimizer(learning_rate=fn2, max_iteration=max_iter, eps=eps)
         assert callable(op2.eta) == True and op2.eta.__code__.co_code == fn2.__code__.co_code
-        assert op2.max_iteration==max_iter and op2.eps==eps and op2.lazy==False
+        assert op2.max_iteration==max_iter and op2.eps==eps
 
     def test_minimize(self):
         lr=0.5
