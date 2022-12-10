@@ -302,6 +302,11 @@ class TestDualNumber():
         complex_num = 5+2j
         with pytest.raises(TypeError):
             d3 = complex_num**d1
+            
+        # negative input
+        with np.errstate(invalid='raise'):
+            with pytest.raises(FloatingPointError):
+                (-int_num) ** d1
 
     def test_isub(self):
         real1=1
@@ -405,154 +410,164 @@ class TestDualNumber():
         # test negation operator
         d2 = -d1
         assert d2.real == -real1 and d2.dual == -dual1
-    
-    # def test_pos(self):
-    #     real1=1
-    #     dual1=2
-    #     d1=DualNumber(real1,dual1)
-    #     # test negation operator
-    #     d2 = +d1
-    #     assert d2.real == real1 and d2.dual == dual1
         
-    # def test_eq(self):
-    #     real1=1
-    #     dual1=2
-    #     d1=DualNumber(real1,dual1)
-    #     d2=DualNumber(real1,dual1)
-        
-    #     real3=2
-    #     dual3=1
-    #     d3=DualNumber(real3,dual3)
-        
-    #     int_num=int(real1)
-    #     float_num=float(real1)
-        
-    #     # test equality operator for dual numbers
-    #     assert d1==d2
-    #     assert not (d1==d3)
-    #     # test equality operator with int number
-    #     assert d1==(int_num)
-    #     assert not(d1==int_num-1)
-    #     # test equality operator with float number
-    #     assert d1==(float_num)
-    #     assert not(d1==float_num-1.0)
-        
-    # def test_neq(self):
-    #     real1=1
-    #     dual1=2
-    #     d1=DualNumber(real1,dual1)
-    #     d2=DualNumber(real1,dual1)
-        
-    #     real3=2
-    #     dual3=1
-    #     d3=DualNumber(real3,dual3)
-        
-    #     int_num=int(real1)
-    #     float_num=float(real1)
-        
-    #     # test not equality operator for dual numbers
-    #     assert d1!=d3
-    #     assert not (d1!=d2)
-    #     # test not equality operator with int number
-    #     assert d1!=(int_num-1)
-    #     assert not(d1!=int_num)
-    #     # test not equality operator with float number
-    #     assert d1!=(float_num-1.0)
-    #     assert not(d1!=float_num)
+    def test_eq(self):
+        real1=1
+        dual1=2
+        d1=DualNumber(real1,dual1)
+        d2=DualNumber(real1,dual1)
 
-    # def test_lt(self):
-    #     real1=1
-    #     dual1=2
-    #     d1=DualNumber(real1,dual1)
-        
-    #     real2=3
-    #     dual2=4
-    #     d2=DualNumber(real2,dual2)
-        
-    #     int_num=int(5)
-    #     float_num=float(5.0)
-        
-    #     # test less-than operator for dual numbers
-    #     assert d1<d2
-    #     # test less-than operator with int number
-    #     assert d1<int_num
-    #     # test less-than operator with float number
-    #     assert d1<float_num
-        
-    # def test_gt(self):
-    #     real1=5
-    #     dual1=4
-    #     d1=DualNumber(real1,dual1)
-        
-    #     real2=3
-    #     dual2=2
-    #     d2=DualNumber(real2,dual2)
-        
-    #     int_num=int(1)
-    #     float_num=float(1.0)
-        
-    #     # test greater-than operator for dual numbers
-    #     assert d1>d2
-    #     # test greater-than operator with int number
-    #     assert d1>int_num
-    #     # test greater-than operator with float number
-    #     assert d1>float_num
+        real3=2
+        dual3=1
+        d3=DualNumber(real3,dual3)
 
-    # def test_le(self):
-    #     real1=1
-    #     dual1=2
-    #     d1=DualNumber(real1,dual1)
+        int_num=int(real1)
+        float_num=float(real1)
         
-    #     real2=3
-    #     dual2=4
-    #     d2=DualNumber(real2,dual2)
+        # test equality operator for dual numbers
+        assert d1==d2
+        assert not (d1==d3)
+        # test equality operator with int number
+        assert d1==(int_num)
+        assert not(d1==int_num-1)
+        # test equality operator with float number
+        assert d1==(float_num)
+        assert not(d1==float_num-1.0)
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1=='1'
         
-    #     real3=1
-    #     dual3=2
-    #     d3=DualNumber(real3,dual3)
+    def test_ne(self):
+        real1=1
+        dual1=2
+        d1=DualNumber(real1,dual1)
+        d2=DualNumber(real1,dual1)
         
-    #     int_num=int(5)
-    #     int_num2=int(1)
-    #     float_num=float(5.0)
-    #     float_num2=float(1.0)
+        real3=2
+        dual3=1
+        d3=DualNumber(real3,dual3)
         
-    #     # test less-than-or-equal operator for dual numbers
-    #     assert d1<=d2
-    #     assert d1<=d3
-    #     # test less-than-or-equal operator with int number
-    #     assert d1<=int_num
-    #     assert d1<=int_num2
-    #     # test less-than-or-equal operator with float number
-    #     assert d1<=float_num
-    #     assert d1<=float_num2
+        int_num=int(real1)
+        float_num=float(real1)
         
-    # def test_le(self):
-    #     real1=5
-    #     dual1=4
-    #     d1=DualNumber(real1,dual1)
+        # test not equality operator for dual numbers
+        assert d1!=d3
+        assert not (d1!=d2)
+        # test not equality operator with int number
+        assert d1!=(int_num-1)
+        assert not(d1!=int_num)
+        # test not equality operator with float number
+        assert d1!=(float_num-1.0)
+        assert not(d1!=float_num)
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1!='1'
+
+    def test_lt(self):
+        real1=1
+        dual1=2
+        d1=DualNumber(real1,dual1)
         
-    #     real2=3
-    #     dual2=2
-    #     d2=DualNumber(real2,dual2)
+        real2=3
+        dual2=4
+        d2=DualNumber(real2,dual2)
         
-    #     real3=5
-    #     dual3=4
-    #     d3=DualNumber(real3,dual3)
+        int_num=int(5)
+        float_num=float(5.0)
         
-    #     int_num=int(1)
-    #     int_num2=int(5)
-    #     float_num=float(1.0)
-    #     float_num2=float(5.0)
+        # test less-than operator for dual numbers
+        assert d1<d2
+        # test less-than operator with int number
+        assert d1<int_num
+        # test less-than operator with float number
+        assert d1<float_num
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1<'2'
         
-    #     # test greater-than-or-equal operator for dual numbers
-    #     assert d1>=d2
-    #     assert d1>=d3
-    #     # test greater-than-or-equal operator with int number
-    #     assert d1>=int_num
-    #     assert d1>=int_num2
-    #     # test greater-than-or-equal operator with float number
-    #     assert d1>=float_num
-    #     assert d1>=float_num2
+    def test_gt(self):
+        real1=5
+        dual1=4
+        d1=DualNumber(real1,dual1)
+        
+        real2=3
+        dual2=2
+        d2=DualNumber(real2,dual2)
+        
+        int_num=int(1)
+        float_num=float(1.0)
+        
+        # test greater-than operator for dual numbers
+        assert d1>d2
+        # test greater-than operator with int number
+        assert d1>int_num
+        # test greater-than operator with float number
+        assert d1>float_num
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1>'0'
+
+    def test_le(self):
+        real1=1
+        dual1=2
+        d1=DualNumber(real1,dual1)
+        
+        real2=3
+        dual2=4
+        d2=DualNumber(real2,dual2)
+        
+        real3=1
+        dual3=2
+        d3=DualNumber(real3,dual3)
+        
+        int_num=int(5)
+        int_num2=int(1)
+        float_num=float(5.0)
+        float_num2=float(1.0)
+        
+        # test less-than-or-equal operator for dual numbers
+        assert d1<=d2
+        assert d1<=d3
+        # test less-than-or-equal operator with int number
+        assert d1<=int_num
+        assert d1<=int_num2
+        # test less-than-or-equal operator with float number
+        assert d1<=float_num
+        assert d1<=float_num2
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1<='1'
+        
+    def test_ge(self):
+        real1=5
+        dual1=4
+        d1=DualNumber(real1,dual1)
+        
+        real2=3
+        dual2=2
+        d2=DualNumber(real2,dual2)
+        
+        real3=5
+        dual3=4
+        d3=DualNumber(real3,dual3)
+        
+        int_num=int(1)
+        int_num2=int(5)
+        float_num=float(1.0)
+        float_num2=float(5.0)
+        
+        # test greater-than-or-equal operator for dual numbers
+        assert d1>=d2
+        assert d1>=d3
+        # test greater-than-or-equal operator with int number
+        assert d1>=int_num
+        assert d1>=int_num2
+        # test greater-than-or-equal operator with float number
+        assert d1>=float_num
+        assert d1>=float_num2
+        # handle wrong input type
+        with pytest.raises(TypeError):
+            d1>='1'
         
 if __name__ == "__main__":
     pass

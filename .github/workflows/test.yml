@@ -4,7 +4,8 @@ name: test AD
 on:
   push:
     branches:
-      - milestone2_dev
+      - final_dev
+      - main
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel.
 # For more on jobs:

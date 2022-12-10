@@ -20,12 +20,22 @@ class function:
         ----------
         f : user defined function(s)
             A function or multiple functions that takes in a vector of x or one x as a scalar and compute arithmetic result.
-
+        x_dim : int
+            Specify how many independent variables there are in all input functions.
+	    
         """
         self.x_dim = x_dim
         self.function_list = f #list of functions each returning one output
 
     def _plugin(self,x): # x is an iterable
+        """
+        Process independent variables as a vector input.
+		
+        ----------
+        x : int or float or array-like of numeric values.
+            Specify how many independent variables there are in all input functions.
+	    
+        """
         results = []
         for f in self.function_list:
             try:
@@ -90,7 +100,17 @@ class function:
         -------
         J : array_like
             Jacobian matrix for given function.
-
+	    
+        Examples
+        --------
+        >>> def f(x): # user-defined function
+        >>>   return ad.sin(ad.exp(x)) + (6**ad.cos(x)/x)**x - 2*ad.tan(-x)
+        >>> f = function(f) # initiate a function object
+	>>> print("f(1) = {:.2f}".format(f(1))) # f(1) rounded to 2dp should be 6.16
+        f(1) = 6.16
+	>>> print("df/dx(1) = {:.2f}".format(f.grad(1))) # f'(1) rounded to 2dp should be 0.32
+        df/dx(1) = 0.32
+	
         """
         # Preprocess x
         x = np.array(x).reshape(-1) #accepting all kinds of input and make them into 1-d array
