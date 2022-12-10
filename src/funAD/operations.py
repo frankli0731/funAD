@@ -103,7 +103,7 @@ def sin(x):
   Parameters
   ----------
   x : int or float or DualNumber instance
-      Each number represent angle in radians (:math:`2 \pi` rad equals 360 degrees).
+      Each number represents angle in radians (:math:`2 \pi` rad equals 360 degrees).
 
   Returns
   -------
@@ -132,7 +132,7 @@ def cos(x):
   Parameters
   ----------
   x : int or float or DualNumber instance
-      Each number represent angle in radians (:math:`2 \pi` rad equals 360 degrees).
+      Each number represents angle in radians (:math:`2 \pi` rad equals 360 degrees).
 
   Returns
   -------
