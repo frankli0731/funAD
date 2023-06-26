@@ -1,7 +1,3 @@
-# team21
-[![Continuous Integration Test Coverage for Milestone 2](https://code.harvard.edu/CS107/team21/actions/workflows/coverage.yml/badge.svg?branch=milestone2_dev)](https://code.harvard.edu/CS107/team21/actions/workflows/coverage.yml)
-[![test AD for Milestone 2](https://code.harvard.edu/CS107/team21/actions/workflows/test.yml/badge.svg?branch=milestone2_dev)](https://code.harvard.edu/CS107/team21/actions/workflows/test.yml)
-
 ## Brief Introduction
 
 `funAD` is a PyPi-distributed package that executes forward-mode of automatic differentiation, enabling users to solve functional derivatives with high computational efficiency and machine precision.
@@ -12,7 +8,7 @@ To install, run the following command in your terminal
 
 `pip install funAD`
 
-For details instruction on how to use this package, please follow the steps in the [usage page](https://code.harvard.edu/CS107/team21/tree/main/docs/documentation.ipynb).
+For details instruction on how to use this package, please follow the steps in the [My Notebook](docs/milestone2.ipynb)
 
 **Group Number:**
 
