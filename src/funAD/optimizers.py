@@ -5,7 +5,6 @@ This module implements different optimizers classes, which is the key extension 
 
 """
 from abc import abstractmethod
-import time
 import numpy as np
 from .function import function
 
